@@ -27,7 +27,7 @@ public class Main {
 	
 	static void configureWindow() {
 		// Setup Window
-		frame.setTitle("Illuminati Board Game");
+		frame.setTitle("Illuminati - Lucky7");
 		renderer.setPreferredSize(new Dimension(800, 600));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(renderer);
