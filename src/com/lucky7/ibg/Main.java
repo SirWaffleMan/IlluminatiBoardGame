@@ -15,13 +15,14 @@ public class Main {
 	public static void main(String[] args) {
 		init();
 		configureWindow();
+		start();
 	}
 	
 	static void init() {
 		// Initialize
 		game = new Game();
 		frame = new JFrame();
-		renderer = new Renderer();
+		renderer = new Renderer(game);
 	}
 	
 	static void configureWindow() {
@@ -34,6 +35,15 @@ public class Main {
 		frame.pack();
 		renderer.setFocusable(true);
 		renderer.requestFocusInWindow();
+	}
+	
+	static void start() {
+		// Start the game
+		game.start();
+		
+		while(true) {
+			renderer.repaint();
+		}
 	}
 
 }
