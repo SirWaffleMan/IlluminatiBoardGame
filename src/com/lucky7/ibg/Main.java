@@ -28,11 +28,12 @@ public class Main {
 	static void configureWindow() {
 		// Setup Window
 		frame.setTitle("Illuminati - Lucky7");
-		renderer.setPreferredSize(new Dimension(800, 600));
+		renderer.setPreferredSize(new Dimension(600, 500));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(renderer);
 		frame.setVisible(true);
 		frame.pack();
+		frame.setResizable(false);
 		renderer.setFocusable(true);
 		renderer.requestFocusInWindow();
 	}

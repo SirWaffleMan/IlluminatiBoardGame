@@ -1,14 +1,18 @@
 package com.lucky7.ibg.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import com.lucky7.ibg.Game;
 import com.lucky7.ibg.input.ScreenNavigator;
@@ -25,8 +29,11 @@ public class Renderer extends JPanel{
 	public JButton playButton;
 	public JButton exitButton;
 	public JButton backButton;
-	public JButton addPlayerButton;
 	public JButton startGameButton;
+	public JPanel playMenuPanel;
+	public JScrollPane scrollPane;
+	public PlayerTextField[] playerField;
+	public JTextArea instructions;
 	
 	// Images
 	BufferedImage illuminati_img;
@@ -50,9 +57,7 @@ public class Renderer extends JPanel{
 	}
 	
 	void renderPlayMenu(Graphics g) {
-		backButton.setVisible(true);
-		addPlayerButton.setVisible(true);
-		startGameButton.setVisible(true);
+		playMenuPanel.setVisible(true);
 		g.drawImage(illuminati_img, 0, 0, super.getWidth(), super.getHeight(), this);
 	}
 	
@@ -62,24 +67,40 @@ public class Renderer extends JPanel{
 		playButton = new JButton("Play");
 		exitButton = new JButton("Exit");
 		backButton = new JButton("Back");
-		addPlayerButton = new JButton("Add Player");
 		startGameButton = new JButton("Start Game");
+		instructions = new JTextArea();
+		instructions.setText("Please enter name of the player and check box if the player is a CPU.\n"
+							+"Leave the fields blank if you don't want anymore players.\n"
+							+"Press \"Start Game\" when you are ready to play the game.");
+		playMenuPanel = new JPanel();
+		
+		playerField = new PlayerTextField[7];
+		JPanel p = new JPanel();
+		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+		for(int i = 0; i < playerField.length; i++) {
+			playerField[i] = new PlayerTextField();
+			p.add(playerField[i]);
+		}
+		scrollPane = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		playMenuPanel.add(backButton);
+		playMenuPanel.add(startGameButton);
+		playMenuPanel.add(scrollPane);
+		playMenuPanel.add(instructions);
+		playMenuPanel.setPreferredSize(new Dimension(400, 320));
 		
 		// Add listeners
 		playButton.addActionListener(navigator);
 		exitButton.addActionListener(navigator);
 		backButton.addActionListener(navigator);
-		addPlayerButton.addActionListener(navigator);
 		startGameButton.addActionListener(navigator);
 	}
 	
 	void addComponents() {
-		// Adds buttons and other components to panel
+		// Adds buttons to panel
 		add(playButton);
 		add(exitButton);
-		add(backButton);
-		add(addPlayerButton);
-		add(startGameButton);
+		
+		add(playMenuPanel);
 		
 		hideAllComponents();
 	}
@@ -101,9 +122,7 @@ public class Renderer extends JPanel{
 	void hideAllComponents() {
 		playButton.setVisible(false);
 		exitButton.setVisible(false);
-		backButton.setVisible(false);
-		addPlayerButton.setVisible(false);
-		startGameButton.setVisible(false);
+		playMenuPanel.setVisible(false);
 	}
 	
 	@Override
