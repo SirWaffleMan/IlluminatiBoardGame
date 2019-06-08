@@ -4,6 +4,10 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
 
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.player.Player;
@@ -14,7 +18,12 @@ public class Game implements Runnable{
 	ArrayList<Player> players;
 	
 	JFrame frame;
-	GamePanel panel;
+	GamePanel gamePanel;
+	JPanel actionPanel;
+	JSplitPane bottomSplitPane;
+	JSplitPane rightSplitPane;
+	JScrollPane scrollPane;
+	JTextArea gameLogger;
 	
 	public static boolean checkValidGame(ArrayList<Player> players) {
 		if(players.size() >= 2) {
@@ -38,17 +47,27 @@ public class Game implements Runnable{
 	void init() {
 		// Initialize
 		frame = new JFrame("Illuminati - Lucky7");
-		panel = new GamePanel();
+		actionPanel = new JPanel();
+		gamePanel = new GamePanel();
+		gamePanel.setPreferredSize(new Dimension(900, 650));
+		gameLogger = new JTextArea();
+		scrollPane = new JScrollPane(gameLogger);
+		bottomSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gamePanel, scrollPane);
+		rightSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, bottomSplitPane, actionPanel);
+		
+		bottomSplitPane.setDividerSize(6);
+		rightSplitPane.setDividerSize(6);
 	}
 	
 	void configureWindow() {
-		panel.setPreferredSize(new Dimension(800, 600));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(panel);
+		frame.add(rightSplitPane);
 		frame.setVisible(true);
 		frame.pack();
-		panel.setFocusable(true);
-		panel.requestFocusInWindow();
+		bottomSplitPane.setDividerLocation(0.8);
+		rightSplitPane.setDividerLocation(0.8);
+		bottomSplitPane.setFocusable(true);
+		bottomSplitPane.requestFocusInWindow();
 	}
 
 	@Override
