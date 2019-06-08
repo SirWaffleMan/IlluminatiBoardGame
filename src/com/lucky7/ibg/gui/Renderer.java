@@ -73,6 +73,9 @@ public class Renderer extends JPanel{
 							+ "Please enter name of the player and check box if the player is a CPU.\n"
 							+"Leave the fields blank if you don't want anymore players.\n"
 							+"Press \"Start Game\" when you are ready to play the game.");
+		instructions.setPreferredSize(new Dimension(380, 130));
+		instructions.setEditable(false);
+		instructions.setLineWrap(true);
 		playMenuPanel = new JPanel();
 		
 		playerField = new PlayerTextField[7];
@@ -87,7 +90,7 @@ public class Renderer extends JPanel{
 		playMenuPanel.add(startGameButton);
 		playMenuPanel.add(scrollPane);
 		playMenuPanel.add(instructions);
-		playMenuPanel.setPreferredSize(new Dimension(400, 340));
+		playMenuPanel.setPreferredSize(new Dimension(400, 400));
 		
 		// Add listeners
 		playButton.addActionListener(navigator);
