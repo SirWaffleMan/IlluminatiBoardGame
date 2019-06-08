@@ -33,7 +33,6 @@ public class Main {
 		frame.add(renderer);
 		frame.setVisible(true);
 		frame.pack();
-		frame.setResizable(false);
 		renderer.setFocusable(true);
 		renderer.requestFocusInWindow();
 	}
