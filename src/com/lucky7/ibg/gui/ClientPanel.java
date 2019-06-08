@@ -142,7 +142,7 @@ public class ClientPanel extends JPanel{
 		
 		for(int i = 0; i < playerField.length; i++) {
 			if(!playerField[i].getName().equals("")) {
-				players.add(new Player(playerField[i].isCPU()));
+				players.add(new Player(playerField[i].getName(), playerField[i].isCPU()));
 			}
 		}
 		

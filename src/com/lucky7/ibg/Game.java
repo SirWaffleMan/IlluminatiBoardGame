@@ -2,6 +2,7 @@ package com.lucky7.ibg;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -51,6 +52,8 @@ public class Game implements Runnable{
 		gamePanel = new GamePanel();
 		gamePanel.setPreferredSize(new Dimension(900, 650));
 		gameLogger = new JTextArea();
+		gameLogger.setEditable(false);
+		gameLogger.setLineWrap(true);
 		scrollPane = new JScrollPane(gameLogger);
 		bottomSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gamePanel, scrollPane);
 		rightSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, bottomSplitPane, actionPanel);
@@ -69,11 +72,36 @@ public class Game implements Runnable{
 		bottomSplitPane.setFocusable(true);
 		bottomSplitPane.requestFocusInWindow();
 	}
+	
+	void addLog(String message) {
+		gameLogger.append(message + "\n");
+	}
+	
+	void notifyStartup() {
+		addLog("Game starting...");
+		for(int i = 0; i < players.size(); i++) {
+			Player p = players.get(i);
+			addLog(p.getName() + " has joined the game.");
+		}
+	}
+	
+	void shufflePlayers() {
+		Collections.shuffle(players);
+		addLog("Turn order determined:");
+		for(int i = 0; i < players.size(); i++) {
+			int orderIndex = i+1;
+			addLog(String.valueOf(orderIndex) + ". " + players.get(i));
+		}
+	}
 
 	@Override
 	public void run() {
 		// Game main process
 		init();
 		configureWindow();
+		notifyStartup();
+		
+		shufflePlayers();
+		
 	}
 }
