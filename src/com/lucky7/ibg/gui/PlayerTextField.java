@@ -27,4 +27,12 @@ public class PlayerTextField extends JPanel{
 		add(name);
 		add(isCPU);
 	}
+	
+	public String getName() {
+		return name.getText();
+	}
+	
+	public boolean isCPU() {
+		return isCPU.isSelected();
+	}
 }

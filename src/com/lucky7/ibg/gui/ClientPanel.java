@@ -6,18 +6,21 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import com.lucky7.ibg.Game;
 import com.lucky7.ibg.input.ScreenNavigator;
+import com.lucky7.ibg.player.Player;
 
-public class Renderer extends JPanel{
+public class ClientPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -34,11 +37,12 @@ public class Renderer extends JPanel{
 	public JScrollPane scrollPane;
 	public PlayerTextField[] playerField;
 	public JTextArea instructions;
+	public JLabel status;
 	
 	// Images
 	BufferedImage illuminati_img;
 	
-	public Renderer(Game g) {
+	public ClientPanel(Game g) {
 		this.game = g;
 		this.state = ScreenState.MainMenu;
 		init();
@@ -47,18 +51,17 @@ public class Renderer extends JPanel{
 	}
 	
 	void renderGame(Graphics g) {
-		
+		g.setColor(Color.WHITE);
+		g.drawString("Game is running...", 20, super.getHeight() - 20);
 	}
 	
 	void renderMainMenu(Graphics g) {
 		playButton.setVisible(true);
 		exitButton.setVisible(true);
-		g.drawImage(illuminati_img, 0, 0, super.getWidth(), super.getHeight(), this);
 	}
 	
 	void renderPlayMenu(Graphics g) {
 		playMenuPanel.setVisible(true);
-		g.drawImage(illuminati_img, 0, 0, super.getWidth(), super.getHeight(), this);
 	}
 	
 	void init() {
@@ -76,6 +79,10 @@ public class Renderer extends JPanel{
 		instructions.setPreferredSize(new Dimension(380, 130));
 		instructions.setEditable(false);
 		instructions.setLineWrap(true);
+		status = new JLabel();
+		status.setForeground(Color.RED);
+		status.setText("A minimum of 2 players is required.");
+		status.setVisible(false);
 		playMenuPanel = new JPanel();
 		
 		playerField = new PlayerTextField[7];
@@ -90,7 +97,8 @@ public class Renderer extends JPanel{
 		playMenuPanel.add(startGameButton);
 		playMenuPanel.add(scrollPane);
 		playMenuPanel.add(instructions);
-		playMenuPanel.setPreferredSize(new Dimension(400, 400));
+		playMenuPanel.add(status);
+		playMenuPanel.setPreferredSize(new Dimension(400, 460));
 		
 		// Add listeners
 		playButton.addActionListener(navigator);
@@ -129,6 +137,18 @@ public class Renderer extends JPanel{
 		playMenuPanel.setVisible(false);
 	}
 	
+	public ArrayList<Player> getPlayers(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		
+		for(int i = 0; i < playerField.length; i++) {
+			if(!playerField[i].getName().equals("")) {
+				players.add(new Player(playerField[i].isCPU()));
+			}
+		}
+		
+		return players;
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -136,6 +156,7 @@ public class Renderer extends JPanel{
 		// Black Background
 		g.setColor(Color.black);
 		g.fillRect(0, 0, super.getWidth(), super.getHeight());
+		g.drawImage(illuminati_img, 0, 0, super.getWidth(), super.getHeight(), this);
 		
 		switch(state){
 		case Game:

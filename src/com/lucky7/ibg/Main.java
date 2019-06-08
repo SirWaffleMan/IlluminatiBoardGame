@@ -4,46 +4,48 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import com.lucky7.ibg.gui.Renderer;
+import com.lucky7.ibg.gui.ClientPanel;
 
 public class Main {
 	
 	static JFrame frame;
-	static Renderer renderer;
+	static ClientPanel clientPanel;
 	static Game game;
 	
 	public static void main(String[] args) {
 		init();
 		configureWindow();
-		start();
+		startClient();
 	}
 	
 	static void init() {
 		// Initialize
 		game = new Game();
 		frame = new JFrame();
-		renderer = new Renderer(game);
+		clientPanel = new ClientPanel(game);
 	}
 	
 	static void configureWindow() {
 		// Setup Window
-		frame.setTitle("Illuminati - Lucky7");
-		renderer.setPreferredSize(new Dimension(600, 500));
+		frame.setTitle("Illuminati Client - Lucky7");
+		clientPanel.setPreferredSize(new Dimension(600, 500));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(renderer);
+		frame.add(clientPanel);
 		frame.setVisible(true);
 		frame.pack();
-		renderer.setFocusable(true);
-		renderer.requestFocusInWindow();
+		clientPanel.setFocusable(true);
+		clientPanel.requestFocusInWindow();
 	}
 	
-	static void start() {
-		// Start the game
-		game.start();
-		
+	static void startClient() {
 		while(true) {
-			renderer.repaint();
+			clientPanel.repaint();
 		}
+	}
+	
+	public static void startGame() {
+		game.addPlayers(clientPanel.getPlayers());
+		game.start();
 	}
 
 }
