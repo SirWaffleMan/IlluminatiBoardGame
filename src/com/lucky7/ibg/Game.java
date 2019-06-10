@@ -69,6 +69,7 @@ public class Game implements Runnable{
 		// Initialize
 		deck = new ArrayList<Card>();
 		discardPile = new ArrayList<Card>();
+		illuminatiCards = new ArrayList<IlluminatiCard>();
 		frame = new JFrame("Illuminati - Lucky7");
 		actionPanel = new JPanel();
 		gamePanel = new GamePanel();
@@ -120,10 +121,10 @@ public class Game implements Runnable{
 	
 	void shufflePlayers() {
 		Collections.shuffle(players);
+		// Display order of players in logger
 		addLog("Turn order determined:");
 		for(int i = 0; i < players.size(); i++) {
-			int orderIndex = i+1;
-			addLog(String.valueOf(orderIndex) + ". " + players.get(i));
+			addLog(String.valueOf(i + 1) + ". " + players.get(i));
 		}
 	}
 	
