@@ -16,7 +16,6 @@ import com.lucky7.ibg.player.Player;
 public class Game implements Runnable{
 	
 	Thread thread;
-	ArrayList<Player> players;
 	
 	JFrame frame;
 	GamePanel gamePanel;
@@ -25,6 +24,19 @@ public class Game implements Runnable{
 	JSplitPane rightSplitPane;
 	JScrollPane scrollPane;
 	JTextArea gameLogger;
+	
+	ArrayList<Player> players;
+	
+	@Override
+	public void run() {
+		// Game main process
+		init();
+		configureWindow();
+		notifyStartup();
+		
+		shufflePlayers();
+		
+	}
 	
 	public static boolean checkValidGame(ArrayList<Player> players) {
 		if(players.size() >= 2) {
@@ -74,7 +86,10 @@ public class Game implements Runnable{
 	}
 	
 	void addLog(String message) {
+		// Add message
 		gameLogger.append(message + "\n");
+		// Scroll to bottom of log
+		scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
 	}
 	
 	void notifyStartup() {
@@ -94,14 +109,4 @@ public class Game implements Runnable{
 		}
 	}
 
-	@Override
-	public void run() {
-		// Game main process
-		init();
-		configureWindow();
-		notifyStartup();
-		
-		shufflePlayers();
-		
-	}
 }
