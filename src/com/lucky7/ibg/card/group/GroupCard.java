@@ -7,14 +7,18 @@ import com.lucky7.ibg.card.Card;
 
 public abstract class GroupCard extends Card{
 	
-	int power = 0;
-	int tPower = 0;
-	int resistance = 0;
-	int income = 0;
-	ArrayList<Alignments> alignments;
+	protected int power;
+	protected int tPower;
+	protected int resistance;
+	protected int income;
+	protected ArrayList<Alignments> alignments;
 
-	public GroupCard(String name) {
+	public GroupCard(String name, int power, int tPower, int resistance, int income) {
 		super(name);
+		this.power = power;
+		this.tPower = tPower;
+		this.resistance = resistance;
+		this.income = income;
 		alignments = new ArrayList<Alignments>();
 	}
 	
