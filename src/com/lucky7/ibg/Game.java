@@ -3,6 +3,7 @@ package com.lucky7.ibg;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,6 +11,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 
+import com.lucky7.ibg.card.Card;
+import com.lucky7.ibg.card.group.*;
+import com.lucky7.ibg.card.illuminati.*;
+import com.lucky7.ibg.card.special.*;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.player.Player;
 
@@ -26,6 +31,9 @@ public class Game implements Runnable{
 	JTextArea gameLogger;
 	
 	ArrayList<Player> players;
+	ArrayList<IlluminatiCard> illuminatiCards;
+	ArrayList<Card> deck;
+	ArrayList<Card> discardPile;
 	
 	@Override
 	public void run() {
@@ -33,7 +41,7 @@ public class Game implements Runnable{
 		init();
 		configureWindow();
 		notifyStartup();
-		
+		loadCards();
 		shufflePlayers();
 		
 	}
@@ -59,6 +67,8 @@ public class Game implements Runnable{
 	
 	void init() {
 		// Initialize
+		deck = new ArrayList<Card>();
+		discardPile = new ArrayList<Card>();
 		frame = new JFrame("Illuminati - Lucky7");
 		actionPanel = new JPanel();
 		gamePanel = new GamePanel();
@@ -72,6 +82,14 @@ public class Game implements Runnable{
 		
 		bottomSplitPane.setDividerSize(6);
 		rightSplitPane.setDividerSize(6);
+	}
+	
+	int rollDice() {
+		// Simulates the roll of two dice
+		Random random = new Random();
+		int dice1Value = random.nextInt(6) + 1;
+		int dice2Value = random.nextInt(6) + 1;
+		return dice1Value + dice2Value;
 	}
 	
 	void configureWindow() {
@@ -107,6 +125,21 @@ public class Game implements Runnable{
 			int orderIndex = i+1;
 			addLog(String.valueOf(orderIndex) + ". " + players.get(i));
 		}
+	}
+	
+	void loadCards() {
+		// Illuminati Cards
+		illuminatiCards.add(new TheDiscordianSociety());
+		illuminatiCards.add(new TheNetwork());
+		illuminatiCards.add(new TheSocietyOfAssassins());
+		
+		// Group Cards
+		deck.add(new AmericanAutoduelAssociation());
+		deck.add(new AntiNuclearActivists());
+		
+		// Ability Cards
+		deck.add(new Assassination());
+		deck.add(new Bribery());
 	}
 
 }

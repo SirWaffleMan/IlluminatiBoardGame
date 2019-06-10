@@ -11,6 +11,7 @@ public abstract class GroupCard extends Card{
 	protected int tPower;
 	protected int resistance;
 	protected int income;
+	protected int balance;
 	protected ArrayList<Alignments> alignments;
 
 	public GroupCard(String name, int power, int tPower, int resistance, int income) {
@@ -19,6 +20,7 @@ public abstract class GroupCard extends Card{
 		this.tPower = tPower;
 		this.resistance = resistance;
 		this.income = income;
+		this.balance = 0;
 		alignments = new ArrayList<Alignments>();
 	}
 	
@@ -52,6 +54,10 @@ public abstract class GroupCard extends Card{
 	
 	public int getIncome() {
 		return income;
+	}
+	
+	public void addIncome() {
+		this.balance += income;
 	}
 	
 	public ArrayList<Alignments> getAlignments(){
