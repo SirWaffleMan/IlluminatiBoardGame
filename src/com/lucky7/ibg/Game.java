@@ -1,11 +1,18 @@
 package com.lucky7.ibg;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -25,10 +32,29 @@ public class Game implements Runnable{
 	JFrame frame;
 	GamePanel gamePanel;
 	JPanel actionPanel;
+	JPanel topPanel;
+	JPanel bottomPanel;
+	JSplitPane actionSplitPane;
 	JSplitPane bottomSplitPane;
 	JSplitPane rightSplitPane;
 	JScrollPane scrollPane;
 	JTextArea gameLogger;
+	
+	JLabel currentPlayerLabel;
+	JLabel cardSelectedLabel;
+	JComboBox<GroupCard> cardSelectedList;
+	JButton attackToControlButton;
+	JButton attackToNeutralizeButton;
+	JButton attackToDestroyButton;
+	JButton transferMoneyButton;
+	JButton moveGroupButton;
+	JButton dropGroupButton;
+	JButton transferPowerButton;
+	
+	JLabel viewLabel;
+	JComboBox<Object> viewList;
+	JButton illuminatiAbilityButton;
+	JButton endTurnButton;
 	
 	ArrayList<Player> players;
 	ArrayList<IlluminatiCard> illuminatiCards;
@@ -43,9 +69,32 @@ public class Game implements Runnable{
 		notifyStartup();
 		loadCards();
 		shufflePlayers();
-		
+		assignIlluminatiCards();
+		setupWindow();
 	}
 	
+	private void setupWindow() {
+		// setup window for every player
+		cardSelectedList.addItem(players.get(0).getControlledGroups().get(0));
+	}
+
+	private void assignIlluminatiCards() {
+		
+		// Assign random illuminati cards and add initial income
+		
+		Collections.shuffle(illuminatiCards);
+		for(Player p : players) {
+			IlluminatiCard card = illuminatiCards.remove(0);
+			addLog(p.getName() + " was assigned \"" + card.getName() + "\"");
+			p.addCardToPowerStructure(card);
+		}
+		
+		addLog("Adding initial income to all players...");
+		for(Player p : players) {
+			p.addIncome();
+		}
+	}
+
 	public static boolean checkValidGame(ArrayList<Player> players) {
 		if(players.size() >= 2) {
 			return true;
@@ -73,14 +122,58 @@ public class Game implements Runnable{
 		frame = new JFrame("Illuminati - Lucky7");
 		actionPanel = new JPanel();
 		gamePanel = new GamePanel();
+		topPanel = new JPanel();
+		bottomPanel = new JPanel();
 		gamePanel.setPreferredSize(new Dimension(900, 650));
 		gameLogger = new JTextArea();
 		gameLogger.setEditable(false);
 		gameLogger.setLineWrap(true);
 		scrollPane = new JScrollPane(gameLogger);
+		actionSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, topPanel, bottomPanel);
 		bottomSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gamePanel, scrollPane);
-		rightSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, bottomSplitPane, actionPanel);
+		rightSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, bottomSplitPane, actionSplitPane);
 		
+		currentPlayerLabel = new JLabel();
+		currentPlayerLabel.setFont(new Font("Arial", Font.BOLD, 24));
+		currentPlayerLabel.setForeground(Color.BLUE);
+		cardSelectedLabel = new JLabel("Card Selected:");
+		viewLabel = new JLabel("View:");
+		cardSelectedList = new JComboBox<GroupCard>();
+		viewList = new JComboBox<Object>();
+		viewList.setMaximumSize(new Dimension(200, 30));
+		attackToControlButton = new JButton("Attack to Control");
+		attackToNeutralizeButton = new JButton("Attack to Neutralize");
+		attackToDestroyButton = new JButton("Attack to Destroy");
+		transferMoneyButton = new JButton("Transfer Money");
+		moveGroupButton = new JButton("Move Group");
+		dropGroupButton = new JButton("Drop Group");
+		transferPowerButton = new JButton("Transfer Power");
+		illuminatiAbilityButton = new JButton("Use Illuminati Ability");
+		illuminatiAbilityButton.setMaximumSize(new Dimension(300,30));
+		endTurnButton = new JButton("End Turn");
+		endTurnButton.setMaximumSize(new Dimension(300,30));
+		
+		// Configure top panel
+		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
+		topPanel.add(currentPlayerLabel);
+		topPanel.add(cardSelectedLabel);
+		topPanel.add(cardSelectedList);
+		topPanel.add(attackToControlButton);
+		topPanel.add(attackToNeutralizeButton);
+		topPanel.add(attackToDestroyButton);
+		topPanel.add(transferMoneyButton);
+		topPanel.add(moveGroupButton);
+		topPanel.add(dropGroupButton);
+		topPanel.add(transferPowerButton);
+		
+		// Configure bottom panel
+		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
+		bottomPanel.add(viewLabel);
+		bottomPanel.add(viewList);
+		bottomPanel.add(illuminatiAbilityButton);
+		bottomPanel.add(endTurnButton);
+		
+		actionSplitPane.setDividerSize(6);
 		bottomSplitPane.setDividerSize(6);
 		rightSplitPane.setDividerSize(6);
 	}
@@ -99,9 +192,10 @@ public class Game implements Runnable{
 		frame.setVisible(true);
 		frame.pack();
 		bottomSplitPane.setDividerLocation(0.8);
-		rightSplitPane.setDividerLocation(0.8);
-		bottomSplitPane.setFocusable(true);
-		bottomSplitPane.requestFocusInWindow();
+		rightSplitPane.setDividerLocation(0.78);
+		actionSplitPane.setDividerLocation(0.5);
+		gamePanel.setFocusable(true);
+		gamePanel.requestFocusInWindow();
 	}
 	
 	void addLog(String message) {
@@ -126,6 +220,12 @@ public class Game implements Runnable{
 		for(int i = 0; i < players.size(); i++) {
 			addLog(String.valueOf(i + 1) + ". " + players.get(i));
 		}
+		currentPlayerLabel.setText(players.get(0).getName());
+		
+		for(Player p : players) {
+			viewList.addItem(p.getName());
+		}
+		viewList.addItem("Uncontrolled Groups");
 	}
 	
 	void loadCards() {
@@ -133,6 +233,11 @@ public class Game implements Runnable{
 		illuminatiCards.add(new TheDiscordianSociety());
 		illuminatiCards.add(new TheNetwork());
 		illuminatiCards.add(new TheSocietyOfAssassins());
+		illuminatiCards.add(new TheUFOs());
+		illuminatiCards.add(new TheServantsOfCthulhu());
+		illuminatiCards.add(new TheGnomesOfZurich());
+		illuminatiCards.add(new TheBavarianIlluminati());
+		illuminatiCards.add(new TheBermudaTriangle());
 		
 		// Group Cards
 		deck.add(new AmericanAutoduelAssociation());

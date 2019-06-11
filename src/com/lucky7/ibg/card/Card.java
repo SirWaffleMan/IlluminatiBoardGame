@@ -2,7 +2,7 @@ package com.lucky7.ibg.card;
 
 public abstract class Card {
 	
-	String name;
+	protected String name;
 	
 	public Card(String name) {
 		this.name = name;

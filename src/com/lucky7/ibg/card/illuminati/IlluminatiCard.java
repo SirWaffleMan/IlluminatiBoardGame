@@ -1,16 +1,11 @@
 package com.lucky7.ibg.card.illuminati;
 
-import com.lucky7.ibg.card.Card;
+import com.lucky7.ibg.card.group.GroupCard;
 
-public abstract class IlluminatiCard extends Card {
-	
-	protected int power;
-	protected int tPower;
-	protected int income;
-	protected int balance;
+public abstract class IlluminatiCard extends GroupCard {
 
 	public IlluminatiCard(String name, int power, int tPower, int income) {
-		super(name);
+		super(name,power,tPower,0,income);
 		this.power = power;
 		this.tPower = tPower;
 		this.income = income;
@@ -19,6 +14,10 @@ public abstract class IlluminatiCard extends Card {
 	
 	public void addIncome() {
 		balance += income;
+	}
+	
+	public String toString() {
+		return name;
 	}
 
 }
