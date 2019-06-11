@@ -242,7 +242,7 @@ public class Game implements Runnable{
 		// Group Cards
 		deck.add(new AmericanAutoduelAssociation());
 		deck.add(new AntiNuclearActivists());
-		
+		deck.add(new CloneArrangers());
 		// Ability Cards
 		deck.add(new Assassination());
 		deck.add(new Bribery());
