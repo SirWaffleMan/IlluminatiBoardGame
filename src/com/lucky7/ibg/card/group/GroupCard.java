@@ -14,6 +14,12 @@ public abstract class GroupCard extends Card{
 	protected int balance;
 	protected ArrayList<Alignments> alignments;
 
+	/*
+	 * If card does not have a certain attribute (the card doesn't have a power or resistance
+	 * for example) enter a -1 for that value. Note: there is a difference between a card not
+	 * having a power and a card having a power of 0. If it has a 0 enter 0. Remember to add
+	 * group card you made to deck at bottom of Game.java
+	 */
 	public GroupCard(String name, int power, int tPower, int resistance, int income) {
 		super(name);
 		this.power = power;
