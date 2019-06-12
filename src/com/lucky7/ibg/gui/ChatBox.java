@@ -13,5 +13,7 @@ public class ChatBox extends JPanel{
 	public ChatBox() {
 		messageField = new JTextField(10);
 		sendButton = new JButton("Send");
+		this.add(messageField);
+		this.add(sendButton);
 	}
 }
