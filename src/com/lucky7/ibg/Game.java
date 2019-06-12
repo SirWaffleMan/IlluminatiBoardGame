@@ -22,6 +22,7 @@ import com.lucky7.ibg.card.Card;
 import com.lucky7.ibg.card.group.*;
 import com.lucky7.ibg.card.illuminati.*;
 import com.lucky7.ibg.card.special.*;
+import com.lucky7.ibg.gui.ChatBox;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.player.Player;
 
@@ -39,6 +40,8 @@ public class Game implements Runnable{
 	JSplitPane rightSplitPane;
 	JScrollPane scrollPane;
 	JTextArea gameLogger;
+	
+	ChatBox chatBox;
 	
 	JLabel currentPlayerLabel;
 	JLabel cardSelectedLabel;
@@ -137,6 +140,7 @@ public class Game implements Runnable{
 		currentPlayerLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		currentPlayerLabel.setForeground(Color.BLUE);
 		cardSelectedLabel = new JLabel("Card Selected:");
+		chatBox = new ChatBox();
 		viewLabel = new JLabel("View:");
 		cardSelectedList = new JComboBox<GroupCard>();
 		viewList = new JComboBox<Object>();
@@ -152,6 +156,7 @@ public class Game implements Runnable{
 		illuminatiAbilityButton.setMaximumSize(new Dimension(300,30));
 		endTurnButton = new JButton("End Turn");
 		endTurnButton.setMaximumSize(new Dimension(300,30));
+		
 		
 		// Configure top panel
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
@@ -172,6 +177,7 @@ public class Game implements Runnable{
 		bottomPanel.add(viewList);
 		bottomPanel.add(illuminatiAbilityButton);
 		bottomPanel.add(endTurnButton);
+		bottomPanel.add(chatBox);
 		
 		actionSplitPane.setDividerSize(6);
 		bottomSplitPane.setDividerSize(6);
