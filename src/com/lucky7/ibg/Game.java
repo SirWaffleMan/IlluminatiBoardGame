@@ -243,14 +243,23 @@ public class Game implements Runnable{
 		deck.add(new AmericanAutoduelAssociation());
 		deck.add(new AntiNuclearActivists());
 		deck.add(new CloneArrangers());
-		deck.add(new AntiWarActivists());
-		deck.add(new BigMedia());
-		deck.add(new Airlines());
-		deck.add(new Antifa());
-		deck.add(new ArmsSmugglers());
 		// Ability Cards
 		deck.add(new Assassination());
 		deck.add(new Bribery());
+		deck.add(new ComputerEspionage());
+		deck.add(new DeepAgent());
+		deck.add(new Interference());
+		deck.add(new Interference());
+		deck.add(new MarketManipulation());
+		deck.add(new MediaBlitz());
+		deck.add(new MurphysLaw());
+		deck.add(new Ninjas());
+		deck.add(new SecretsManWasNotMeantToKnow());
+		deck.add(new SenateInvestigatingCommittee());
+		deck.add(new SlushFund());
+		deck.add(new SwissBankAccount());
+		deck.add(new TimeWarp());
+		deck.add(new WhiteCollarCrime());
 	}
 
 }
