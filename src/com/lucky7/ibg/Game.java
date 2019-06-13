@@ -243,6 +243,11 @@ public class Game implements Runnable{
 		deck.add(new AmericanAutoduelAssociation());
 		deck.add(new AntiNuclearActivists());
 		deck.add(new CloneArrangers());
+		deck.add(new AntiWarActivists());
+		deck.add(new BigMedia());
+		deck.add(new Airlines());
+		deck.add(new Antifa());
+		deck.add(new ArmsSmugglers());
 		// Ability Cards
 		deck.add(new Assassination());
 		deck.add(new Bribery());
