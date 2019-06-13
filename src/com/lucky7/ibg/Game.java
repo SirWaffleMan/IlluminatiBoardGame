@@ -40,7 +40,6 @@ public class Game implements Runnable{
 	JSplitPane rightSplitPane;
 	JScrollPane scrollPane;
 	JTextArea gameLogger;
-	
 	ChatBox chatBox;
 	
 	JLabel currentPlayerLabel;
