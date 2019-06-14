@@ -31,7 +31,7 @@ public class Game implements Runnable{
 	
 	JFrame frame;
 	GamePanel gamePanel;
-	JPanel actionPanel;
+	JPanel cardActionsPanel;
 	JPanel topPanel;
 	JPanel bottomPanel;
 	JSplitPane actionSplitPane;
@@ -120,7 +120,7 @@ public class Game implements Runnable{
 		discardPile = new ArrayList<Card>();
 		illuminatiCards = new ArrayList<IlluminatiCard>();
 		frame = new JFrame("Illuminati - Lucky7");
-		actionPanel = new JPanel();
+		cardActionsPanel = new JPanel();
 		gamePanel = new GamePanel();
 		topPanel = new JPanel();
 		bottomPanel = new JPanel();
@@ -149,22 +149,21 @@ public class Game implements Runnable{
 		dropGroupButton = new JButton("Drop Group");
 		transferPowerButton = new JButton("Transfer Power");
 		illuminatiAbilityButton = new JButton("Use Illuminati Ability");
-		illuminatiAbilityButton.setMaximumSize(new Dimension(300,30));
 		endTurnButton = new JButton("End Turn");
-		endTurnButton.setMaximumSize(new Dimension(300,30));
 		
 		// Configure top panel
-		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
-		topPanel.add(currentPlayerLabel);
-		topPanel.add(cardSelectedLabel);
-		topPanel.add(cardSelectedList);
-		topPanel.add(attackToControlButton);
-		topPanel.add(attackToNeutralizeButton);
-		topPanel.add(attackToDestroyButton);
-		topPanel.add(transferMoneyButton);
-		topPanel.add(moveGroupButton);
-		topPanel.add(dropGroupButton);
-		topPanel.add(transferPowerButton);
+		cardActionsPanel.setLayout(new BoxLayout(cardActionsPanel, BoxLayout.Y_AXIS));
+		cardActionsPanel.add(currentPlayerLabel);
+		cardActionsPanel.add(cardSelectedLabel);
+		cardActionsPanel.add(cardSelectedList);
+		cardActionsPanel.add(attackToControlButton);
+		cardActionsPanel.add(attackToNeutralizeButton);
+		cardActionsPanel.add(attackToDestroyButton);
+		cardActionsPanel.add(transferMoneyButton);
+		cardActionsPanel.add(moveGroupButton);
+		cardActionsPanel.add(dropGroupButton);
+		cardActionsPanel.add(transferPowerButton);
+		topPanel.add(cardActionsPanel);
 		
 		// Configure bottom panel
 		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
