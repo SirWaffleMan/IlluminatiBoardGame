@@ -240,9 +240,16 @@ public class Game implements Runnable{
 		illuminatiCards.add(new TheBermudaTriangle());
 		
 		// Group Cards
+		deck.add(new Airlines());
 		deck.add(new AmericanAutoduelAssociation());
+		deck.add(new Antifa());
 		deck.add(new AntiNuclearActivists());
+		deck.add(new AntiWarActivists());
+		deck.add(new ArmsSmugglers());
+		deck.add(new BigMedia());
+		deck.add(new BoySprouts());
 		deck.add(new CloneArrangers());
+		
 		// Ability Cards
 		deck.add(new Assassination());
 		deck.add(new Bribery());
