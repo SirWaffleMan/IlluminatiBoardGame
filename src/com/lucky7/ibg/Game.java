@@ -1,11 +1,8 @@
 package com.lucky7.ibg;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -23,6 +20,7 @@ import com.lucky7.ibg.card.Card;
 import com.lucky7.ibg.card.group.*;
 import com.lucky7.ibg.card.illuminati.*;
 import com.lucky7.ibg.card.special.*;
+import com.lucky7.ibg.gui.ActionPanel;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.player.Player;
 
@@ -32,26 +30,15 @@ public class Game implements Runnable{
 	
 	JFrame frame;
 	GamePanel gamePanel;
-	JPanel cardActionsPanel;
-	JPanel otherActionsPanel;
 	JPanel topPanel;
+	ActionPanel actionPanel;
 	JPanel bottomPanel;
+	JPanel otherActionsPanel;
 	JSplitPane actionSplitPane;
 	JSplitPane bottomSplitPane;
 	JSplitPane rightSplitPane;
 	JScrollPane scrollPane;
 	JTextArea gameLogger;
-	
-	JLabel currentPlayerLabel;
-	JLabel cardSelectedLabel;
-	JComboBox<GroupCard> cardSelectedList;
-	JButton attackToControlButton;
-	JButton attackToNeutralizeButton;
-	JButton attackToDestroyButton;
-	JButton transferMoneyButton;
-	JButton moveGroupButton;
-	JButton dropGroupButton;
-	JButton transferPowerButton;
 	
 	JLabel viewLabel;
 	JComboBox<Object> viewList;
@@ -76,14 +63,12 @@ public class Game implements Runnable{
 	}
 	
 	private void setupWindow() {
-		// setup window for every player
-		cardSelectedList.addItem(players.get(0).getControlledGroups().get(0));
+		actionPanel.updatePlayer(players.get(0));
 	}
 
 	private void assignIlluminatiCards() {
 		
 		// Assign random illuminati cards and add initial income
-		
 		Collections.shuffle(illuminatiCards);
 		for(Player p : players) {
 			IlluminatiCard card = illuminatiCards.remove(0);
@@ -122,10 +107,10 @@ public class Game implements Runnable{
 		discardPile = new ArrayList<Card>();
 		illuminatiCards = new ArrayList<IlluminatiCard>();
 		frame = new JFrame("Illuminati - Lucky7");
-		cardActionsPanel = new JPanel();
 		otherActionsPanel = new JPanel();
 		gamePanel = new GamePanel();
 		topPanel = new JPanel();
+		actionPanel = new ActionPanel();
 		bottomPanel = new JPanel();
 		gamePanel.setPreferredSize(new Dimension(900, 650));
 		gameLogger = new JTextArea();
@@ -136,64 +121,17 @@ public class Game implements Runnable{
 		bottomSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gamePanel, scrollPane);
 		rightSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, bottomSplitPane, actionSplitPane);
 		
-		currentPlayerLabel = new JLabel();
-		currentPlayerLabel.setFont(new Font("Arial", Font.BOLD, 24));
-		currentPlayerLabel.setForeground(Color.BLUE);
-		cardSelectedLabel = new JLabel("Card Selected:");
 		viewLabel = new JLabel("View:");
-		cardSelectedList = new JComboBox<GroupCard>();
 		viewList = new JComboBox<Object>();
 		viewList.setMaximumSize(new Dimension(200, 30));
-		attackToControlButton = new JButton("Attack to Control");
-		attackToNeutralizeButton = new JButton("Attack to Neutralize");
-		attackToDestroyButton = new JButton("Attack to Destroy");
-		transferMoneyButton = new JButton("Transfer Money");
-		moveGroupButton = new JButton("Move Group");
-		dropGroupButton = new JButton("Drop Group");
-		transferPowerButton = new JButton("Transfer Power");
 		illuminatiAbilityButton = new JButton("Use Illuminati Ability");
 		endTurnButton = new JButton("End Turn");
 		
 		// Configure top panel
-		cardActionsPanel.setLayout(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
-		//currentPlayerLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-		gbc.fill = GridBagConstraints.CENTER;
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		cardActionsPanel.add(currentPlayerLabel, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		cardActionsPanel.add(cardSelectedLabel, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		cardActionsPanel.add(cardSelectedList, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		gbc.insets = new Insets(10,0,0,0);
-		cardActionsPanel.add(attackToControlButton, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 4;
-		gbc.insets = new Insets(0,0,0,0);
-		cardActionsPanel.add(attackToNeutralizeButton, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		cardActionsPanel.add(attackToDestroyButton, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 6;
-		cardActionsPanel.add(transferMoneyButton, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 7;
-		cardActionsPanel.add(moveGroupButton, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 8;
-		cardActionsPanel.add(dropGroupButton, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 9;
-		cardActionsPanel.add(transferPowerButton, gbc);
-		topPanel.add(cardActionsPanel);
+		topPanel.add(actionPanel);
 		
 		// Configure bottom panel
+		GridBagConstraints gbc = new GridBagConstraints();
 		otherActionsPanel.setLayout(new GridBagLayout());
 		gbc.fill = GridBagConstraints.CENTER;
 		gbc.gridx = 0;
@@ -240,8 +178,6 @@ public class Game implements Runnable{
 	void addLog(String message) {
 		// Add message
 		gameLogger.append(message + "\n");
-		// Scroll to bottom of log
-		scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
 	}
 	
 	void notifyStartup() {
@@ -259,7 +195,6 @@ public class Game implements Runnable{
 		for(int i = 0; i < players.size(); i++) {
 			addLog(String.valueOf(i + 1) + ". " + players.get(i));
 		}
-		currentPlayerLabel.setText(players.get(0).getName());
 		
 		for(Player p : players) {
 			viewList.addItem(p.getName());
