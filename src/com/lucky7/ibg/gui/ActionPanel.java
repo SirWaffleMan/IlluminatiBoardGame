@@ -27,9 +27,10 @@ public class ActionPanel extends JPanel{
 	public JButton attackToNeutralizeButton;
 	public JButton attackToDestroyButton;
 	public JButton transferMoneyButton;
+	public JButton transferPowerButton;
 	public JButton moveGroupButton;
 	public JButton dropGroupButton;
-	public JButton transferPowerButton;
+	public JButton useAbilityButton;
 	
 	public ActionPanel() {
 		init();
@@ -57,6 +58,7 @@ public class ActionPanel extends JPanel{
 		moveGroupButton = new JButton("Move Group");
 		dropGroupButton = new JButton("Drop Group");
 		transferPowerButton = new JButton("Transfer Power");
+		useAbilityButton = new JButton("Use Ability");
 	}
 	
 	void configure() {
@@ -96,5 +98,8 @@ public class ActionPanel extends JPanel{
 		gbc.gridx = 0;
 		gbc.gridy = 9;
 		add(transferPowerButton, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 10;
+		add(useAbilityButton, gbc);
 	}
 }

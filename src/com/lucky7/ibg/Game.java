@@ -1,16 +1,11 @@
 package com.lucky7.ibg;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -22,6 +17,7 @@ import com.lucky7.ibg.card.illuminati.*;
 import com.lucky7.ibg.card.special.*;
 import com.lucky7.ibg.gui.ActionPanel;
 import com.lucky7.ibg.gui.GamePanel;
+import com.lucky7.ibg.gui.GlobalActionPanel;
 import com.lucky7.ibg.player.Player;
 
 public class Game implements Runnable{
@@ -33,17 +29,12 @@ public class Game implements Runnable{
 	JPanel topPanel;
 	ActionPanel actionPanel;
 	JPanel bottomPanel;
-	JPanel otherActionsPanel;
+	GlobalActionPanel globalActionPanel;
 	JSplitPane actionSplitPane;
 	JSplitPane bottomSplitPane;
 	JSplitPane rightSplitPane;
 	JScrollPane scrollPane;
 	JTextArea gameLogger;
-	
-	JLabel viewLabel;
-	JComboBox<Object> viewList;
-	JButton illuminatiAbilityButton;
-	JButton endTurnButton;
 	
 	ArrayList<Player> players;
 	ArrayList<IlluminatiCard> illuminatiCards;
@@ -64,6 +55,7 @@ public class Game implements Runnable{
 	
 	private void setupWindow() {
 		actionPanel.updatePlayer(players.get(0));
+		globalActionPanel.addPlayerList(players);
 	}
 
 	private void assignIlluminatiCards() {
@@ -107,11 +99,11 @@ public class Game implements Runnable{
 		discardPile = new ArrayList<Card>();
 		illuminatiCards = new ArrayList<IlluminatiCard>();
 		frame = new JFrame("Illuminati - Lucky7");
-		otherActionsPanel = new JPanel();
 		gamePanel = new GamePanel();
 		topPanel = new JPanel();
 		actionPanel = new ActionPanel();
 		bottomPanel = new JPanel();
+		globalActionPanel = new GlobalActionPanel();
 		gamePanel.setPreferredSize(new Dimension(900, 650));
 		gameLogger = new JTextArea();
 		gameLogger.setEditable(false);
@@ -121,34 +113,11 @@ public class Game implements Runnable{
 		bottomSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gamePanel, scrollPane);
 		rightSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, bottomSplitPane, actionSplitPane);
 		
-		viewLabel = new JLabel("View:");
-		viewList = new JComboBox<Object>();
-		viewList.setMaximumSize(new Dimension(200, 30));
-		illuminatiAbilityButton = new JButton("Use Illuminati Ability");
-		endTurnButton = new JButton("End Turn");
-		
 		// Configure top panel
 		topPanel.add(actionPanel);
 		
 		// Configure bottom panel
-		GridBagConstraints gbc = new GridBagConstraints();
-		otherActionsPanel.setLayout(new GridBagLayout());
-		gbc.fill = GridBagConstraints.CENTER;
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		otherActionsPanel.add(viewLabel,gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		otherActionsPanel.add(viewList,gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		otherActionsPanel.add(illuminatiAbilityButton,gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		otherActionsPanel.add(endTurnButton,gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 4;
-		bottomPanel.add(otherActionsPanel, gbc);
+		bottomPanel.add(globalActionPanel);
 		
 		actionSplitPane.setDividerSize(6);
 		bottomSplitPane.setDividerSize(6);
@@ -195,11 +164,6 @@ public class Game implements Runnable{
 		for(int i = 0; i < players.size(); i++) {
 			addLog(String.valueOf(i + 1) + ". " + players.get(i));
 		}
-		
-		for(Player p : players) {
-			viewList.addItem(p.getName());
-		}
-		viewList.addItem("Uncontrolled Groups");
 	}
 	
 	void loadCards() {
