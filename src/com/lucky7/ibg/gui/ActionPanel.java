@@ -103,6 +103,8 @@ public class ActionPanel extends JPanel{
 		gbc.gridy = 10;
 		add(useAbilityButton, gbc);
 		
+		cardSelectedList.setPreferredSize(new Dimension(150, 28));
+		
 		attackToControlButton.setPreferredSize(new Dimension(150, 28));
 		attackToControlButton.setBackground(new Color(0, 102, 13));
 		attackToControlButton.setForeground(Color.white);

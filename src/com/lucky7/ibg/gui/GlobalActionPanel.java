@@ -53,6 +53,9 @@ public class GlobalActionPanel extends JPanel{
 		
 		viewLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		viewLabel.setForeground(Color.WHITE);
+		
+		viewList.setPreferredSize(new Dimension(150, 28));
+		
 		endTurnButton.setPreferredSize(new Dimension(150, 28));
 		endTurnButton.setBackground(new Color(170, 0, 0));
 		endTurnButton.setForeground(Color.white);
