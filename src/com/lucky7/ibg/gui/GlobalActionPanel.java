@@ -22,6 +22,7 @@ public class GlobalActionPanel extends JPanel{
 	public JLabel viewLabel;
 	public JComboBox<Object> viewList;
 	public JButton endTurnButton;
+	public JButton resignButton;
 	
 	public GlobalActionPanel() {
 		init();
@@ -32,6 +33,7 @@ public class GlobalActionPanel extends JPanel{
 		viewLabel = new JLabel("View:");
 		viewList = new JComboBox<Object>();
 		endTurnButton = new JButton("End Turn");
+		resignButton = new JButton("Resign");
 	}
 	
 	void configure() {
@@ -50,6 +52,8 @@ public class GlobalActionPanel extends JPanel{
 		add(endTurnButton,gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 4;
+		gbc.insets = new Insets(2,0,0,0);
+		add(resignButton,gbc);
 		
 		viewLabel.setFont(new Font("Arial", Font.BOLD, 12));
 		viewLabel.setForeground(Color.WHITE);
@@ -60,6 +64,12 @@ public class GlobalActionPanel extends JPanel{
 		endTurnButton.setBackground(new Color(170, 0, 0));
 		endTurnButton.setForeground(Color.white);
 		endTurnButton.setFont(new Font("Arial", Font.BOLD, 12));
+		
+		resignButton.setPreferredSize(new Dimension(150, 28));
+		resignButton.setBackground(new Color(170, 0, 0));
+		resignButton.setForeground(Color.white);
+		resignButton.setFont(new Font("Arial", Font.BOLD, 12));
+		
 		setOpaque(false);
 	}
 	
