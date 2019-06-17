@@ -49,7 +49,7 @@ public class ActionPanel extends JPanel{
 	void init() {
 		currentPlayerLabel = new JLabel();
 		currentPlayerLabel.setFont(new Font("Arial", Font.BOLD, 24));
-		currentPlayerLabel.setForeground(Color.BLUE);
+		currentPlayerLabel.setForeground(new Color(130, 144, 255));
 		cardSelectedLabel = new JLabel("Card selected:");
 		cardSelectedList = new JComboBox<GroupCard>();
 		attackToControlButton = new JButton("Attack to Control");
@@ -142,5 +142,8 @@ public class ActionPanel extends JPanel{
 		useAbilityButton.setBackground(new Color(0, 102, 13));
 		useAbilityButton.setForeground(Color.white);
 		useAbilityButton.setFont(new Font("Arial", Font.BOLD, 12));
+		
+		cardSelectedLabel.setForeground(Color.WHITE);
+		setOpaque(false);
 	}
 }

@@ -1,5 +1,6 @@
 package com.lucky7.ibg;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -113,15 +114,21 @@ public class Game implements Runnable{
 		bottomSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gamePanel, scrollPane);
 		rightSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, bottomSplitPane, actionSplitPane);
 		
+		// Configure Logger
+		gameLogger.setBackground(new Color(60,60,60));
+		gameLogger.setForeground(Color.WHITE);
+		
 		// Configure top panel
 		topPanel.add(actionPanel);
+		topPanel.setBackground(new Color(60,60,60));
 		
 		// Configure bottom panel
 		bottomPanel.add(globalActionPanel);
+		bottomPanel.setBackground(new Color(60,60,60));
 		
-		actionSplitPane.setDividerSize(6);
-		bottomSplitPane.setDividerSize(6);
-		rightSplitPane.setDividerSize(6);
+		actionSplitPane.setDividerSize(2);
+		bottomSplitPane.setDividerSize(2);
+		rightSplitPane.setDividerSize(2);
 	}
 	
 	int rollDice() {
