@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -100,6 +101,7 @@ public class Game implements Runnable{
 		discardPile = new ArrayList<Card>();
 		illuminatiCards = new ArrayList<IlluminatiCard>();
 		frame = new JFrame("Illuminati - Lucky7");
+		frame.setIconImage(new ImageIcon("res/illuminati_icon.png").getImage());
 		gamePanel = new GamePanel();
 		topPanel = new JPanel();
 		actionPanel = new ActionPanel();
