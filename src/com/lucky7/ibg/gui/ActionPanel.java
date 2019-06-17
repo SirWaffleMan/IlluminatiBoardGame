@@ -1,6 +1,7 @@
 package com.lucky7.ibg.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -81,7 +82,7 @@ public class ActionPanel extends JPanel{
 		add(attackToControlButton, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 4;
-		gbc.insets = new Insets(0,0,0,0);
+		gbc.insets = new Insets(2,0,0,0);
 		add(attackToNeutralizeButton, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 5;
@@ -101,5 +102,45 @@ public class ActionPanel extends JPanel{
 		gbc.gridx = 0;
 		gbc.gridy = 10;
 		add(useAbilityButton, gbc);
+		
+		attackToControlButton.setPreferredSize(new Dimension(150, 28));
+		attackToControlButton.setBackground(new Color(0, 102, 13));
+		attackToControlButton.setForeground(Color.white);
+		attackToControlButton.setFont(new Font("Arial", Font.BOLD, 12));
+		
+		attackToNeutralizeButton.setPreferredSize(new Dimension(150, 28));
+		attackToNeutralizeButton.setBackground(new Color(0, 102, 13));
+		attackToNeutralizeButton.setForeground(Color.white);
+		attackToNeutralizeButton.setFont(new Font("Arial", Font.BOLD, 12));
+		
+		attackToDestroyButton.setPreferredSize(new Dimension(150, 28));
+		attackToDestroyButton.setBackground(new Color(0, 102, 13));
+		attackToDestroyButton.setForeground(Color.white);
+		attackToDestroyButton.setFont(new Font("Arial", Font.BOLD, 12));
+		
+		transferMoneyButton.setPreferredSize(new Dimension(150, 28));
+		transferMoneyButton.setBackground(new Color(0, 102, 13));
+		transferMoneyButton.setForeground(Color.white);
+		transferMoneyButton.setFont(new Font("Arial", Font.BOLD, 12));
+		
+		moveGroupButton.setPreferredSize(new Dimension(150, 28));
+		moveGroupButton.setBackground(new Color(0, 102, 13));
+		moveGroupButton.setForeground(Color.white);
+		moveGroupButton.setFont(new Font("Arial", Font.BOLD, 12));
+		
+		dropGroupButton.setPreferredSize(new Dimension(150, 28));
+		dropGroupButton.setBackground(new Color(0, 102, 13));
+		dropGroupButton.setForeground(Color.white);
+		dropGroupButton.setFont(new Font("Arial", Font.BOLD, 12));
+		
+		transferPowerButton.setPreferredSize(new Dimension(150, 28));
+		transferPowerButton.setBackground(new Color(0, 102, 13));
+		transferPowerButton.setForeground(Color.white);
+		transferPowerButton.setFont(new Font("Arial", Font.BOLD, 12));
+		
+		useAbilityButton.setPreferredSize(new Dimension(150, 28));
+		useAbilityButton.setBackground(new Color(0, 102, 13));
+		useAbilityButton.setForeground(Color.white);
+		useAbilityButton.setFont(new Font("Arial", Font.BOLD, 12));
 	}
 }
