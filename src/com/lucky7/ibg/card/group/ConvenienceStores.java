@@ -2,11 +2,12 @@ package com.lucky7.ibg.card.group;
 
 import com.lucky7.ibg.card.Alignments;
 
-public class BoySprouts extends GroupCard{
-	public BoySprouts() {
-		super("BoySprouts", -1, -1, 3, 1);
-		
+public class ConvenienceStores extends GroupCard{
+
+	public ConvenienceStores() {
+		super("Convenience Stores", 1, 0, 4, 3);
 		addAlignment(Alignments.Straight);
 		addAlignment(Alignments.Peaceful);
 	}
+
 }

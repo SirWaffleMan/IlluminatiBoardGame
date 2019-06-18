@@ -57,6 +57,7 @@ public class Game implements Runnable{
 		shufflePlayers();
 		assignIlluminatiCards();
 		setupWindow();
+		shuffleDeck();
 		
 		// Main game process
 		populateMinimumUncontrolled();
@@ -66,6 +67,10 @@ public class Game implements Runnable{
 	private void setupWindow() {
 		actionPanel.updatePlayer(players.get(0));
 		globalActionPanel.addPlayerList(players);
+	}
+	
+	void shuffleDeck() {
+		Collections.shuffle(deck);
 	}
 
 	private void assignIlluminatiCards() {
