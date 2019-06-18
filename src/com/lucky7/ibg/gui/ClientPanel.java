@@ -121,11 +121,11 @@ public class ClientPanel extends JPanel{
 		
 		backButton.setBackground(new Color(0, 102, 13));
 		backButton.setForeground(Color.white);
-		backButton.setFont(new Font("Arial", Font.BOLD, 16));
+		backButton.setFont(new Font("Arial", Font.BOLD, 12));
 		
 		startGameButton.setBackground(new Color(0, 102, 13));
 		startGameButton.setForeground(Color.white);
-		startGameButton.setFont(new Font("Arial", Font.BOLD, 16));
+		startGameButton.setFont(new Font("Arial", Font.BOLD, 12));
 	}
 	
 	void addComponents() {
