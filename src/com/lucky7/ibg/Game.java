@@ -200,7 +200,6 @@ public class Game implements Runnable{
 				addLog("Added \"" + card.getName() + "\" to uncontrolled groups.");
 				uncontrolled.add((GroupCard)card);
 			}else {
-				addLog("Ability card drawn, re-adding to deck...");
 				deck.add(card);
 			}
 		}
@@ -254,6 +253,9 @@ public class Game implements Runnable{
 		deck.add(new Democrats());
 		deck.add(new EcoGuerrillas());
 		deck.add(new EvilGeniusesForABetterTomorrow());
+		deck.add(new FastFoodChains());
+		deck.add(new FBI());
+		deck.add(new FederalReserve());
 		
 		// Ability Cards
 		deck.add(new Assassination());
