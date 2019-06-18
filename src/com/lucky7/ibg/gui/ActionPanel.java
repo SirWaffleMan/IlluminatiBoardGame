@@ -44,9 +44,11 @@ public class ActionPanel extends JPanel{
 	public void updatePlayer(Player p) {
 		this.currentPlayer = p;
 		currentPlayerLabel.setText(p.getName());
+		cardSelectedList.removeAllItems();
 		for(int i = 0; i < p.getControlledGroups().size(); i++) {
 			cardSelectedList.addItem(p.getControlledGroups().get(i));
 		}
+		repaint();
 	}
 	
 	void init() {

@@ -33,9 +33,9 @@ public class GameInput implements ActionListener{
 		}else if(e.getSource() == game.actionPanel.useAbilityButton) {
 			System.out.println("Use Ability Button");
 		}else if(e.getSource() == game.globalActionPanel.endTurnButton) {
-			System.out.println("End Turn Button");
+			game.endTurn();
 		}else if(e.getSource() == game.globalActionPanel.resignButton) {
-			System.out.println("Resign Button");
+			game.resign();
 		}else if(e.getSource() == game.globalActionPanel.viewList) {
 			game.gamePanel.repaint();
 		}

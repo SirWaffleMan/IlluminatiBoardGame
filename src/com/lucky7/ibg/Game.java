@@ -41,13 +41,15 @@ public class Game implements Runnable{
 	GameInput input;
 	
 	ArrayList<Player> players;
+	int playerIndex = 0;
 	ArrayList<IlluminatiCard> illuminatiCards;
 	ArrayList<Card> deck;
+	ArrayList<GroupCard> uncontrolled;
 	ArrayList<Card> discardPile;
 	
 	@Override
 	public void run() {
-		// Game main process
+		// Game prep
 		init();
 		configureWindow();
 		notifyStartup();
@@ -55,6 +57,10 @@ public class Game implements Runnable{
 		shufflePlayers();
 		assignIlluminatiCards();
 		setupWindow();
+		
+		// Main game process
+		populateMinimumUncontrolled();
+		
 	}
 	
 	private void setupWindow() {
@@ -102,6 +108,7 @@ public class Game implements Runnable{
 		input = new GameInput(this);
 		deck = new ArrayList<Card>();
 		discardPile = new ArrayList<Card>();
+		uncontrolled = new ArrayList<GroupCard>();
 		illuminatiCards = new ArrayList<IlluminatiCard>();
 		frame = new JFrame("Illuminati - Lucky7");
 		frame.setIconImage(new ImageIcon("res/illuminati_icon.png").getImage());
@@ -136,6 +143,18 @@ public class Game implements Runnable{
 		rightSplitPane.setDividerSize(2);
 	}
 	
+	public void endTurn() {
+		addLog(players.get(playerIndex).getName() + " finished his turn.");
+		playerIndex = (playerIndex + 1) % players.size();
+		readyNextPlayer();
+	}
+	
+	public void resign() {
+		addLog(players.get(playerIndex).getName() + " has resigned!");
+		players.remove(playerIndex);
+		readyNextPlayer();
+	}
+	
 	int rollDice() {
 		// Simulates the roll of two dice
 		Random random = new Random();
@@ -167,6 +186,23 @@ public class Game implements Runnable{
 			Player p = players.get(i);
 			addLog(p.getName() + " has joined the game.");
 		}
+	}
+	
+	void populateMinimumUncontrolled() {
+		while(uncontrolled.size() < 4) {
+			Card card = deck.remove(0);
+			if(card instanceof GroupCard) {
+				addLog("Added \"" + card.getName() + "\" to uncontrolled groups.");
+				uncontrolled.add((GroupCard)card);
+			}else {
+				addLog("Ability card drawn, re-adding to deck...");
+				deck.add(card);
+			}
+		}
+	}
+	
+	void readyNextPlayer() {
+		actionPanel.updatePlayer(players.get(playerIndex));
 	}
 	
 	void shufflePlayers() {
