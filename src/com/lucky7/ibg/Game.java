@@ -28,7 +28,7 @@ public class Game implements Runnable{
 	Thread thread;
 	
 	JFrame frame;
-	GamePanel gamePanel;
+	public GamePanel gamePanel;
 	JPanel topPanel;
 	public ActionPanel actionPanel;
 	JPanel bottomPanel;
@@ -105,7 +105,7 @@ public class Game implements Runnable{
 		illuminatiCards = new ArrayList<IlluminatiCard>();
 		frame = new JFrame("Illuminati - Lucky7");
 		frame.setIconImage(new ImageIcon("res/illuminati_icon.png").getImage());
-		gamePanel = new GamePanel();
+		gamePanel = new GamePanel(this);
 		topPanel = new JPanel();
 		actionPanel = new ActionPanel(input);
 		bottomPanel = new JPanel();

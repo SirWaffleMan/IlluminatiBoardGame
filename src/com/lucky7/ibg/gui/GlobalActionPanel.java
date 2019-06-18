@@ -62,6 +62,7 @@ public class GlobalActionPanel extends JPanel{
 		viewLabel.setForeground(Color.WHITE);
 		
 		viewList.setPreferredSize(new Dimension(150, 28));
+		viewList.addActionListener(input);
 		
 		endTurnButton.setPreferredSize(new Dimension(150, 28));
 		endTurnButton.setBackground(new Color(170, 0, 0));
@@ -81,7 +82,7 @@ public class GlobalActionPanel extends JPanel{
 	public void addPlayerList(ArrayList<Player> players) {
 		
 		for(int i = 0; i < players.size(); i++) {
-			viewList.addItem(players.get(0).getName());
+			viewList.addItem(players.get(i).getName());
 		}
 		
 		viewList.addItem("Uncontrolled Groups");
