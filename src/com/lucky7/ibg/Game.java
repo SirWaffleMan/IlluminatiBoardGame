@@ -1,18 +1,13 @@
 package com.lucky7.ibg;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -22,7 +17,10 @@ import com.lucky7.ibg.card.Card;
 import com.lucky7.ibg.card.group.*;
 import com.lucky7.ibg.card.illuminati.*;
 import com.lucky7.ibg.card.special.*;
+import com.lucky7.ibg.gui.ActionPanel;
 import com.lucky7.ibg.gui.GamePanel;
+import com.lucky7.ibg.gui.GlobalActionPanel;
+import com.lucky7.ibg.input.GameInput;
 import com.lucky7.ibg.player.Player;
 
 public class Game implements Runnable{
@@ -30,40 +28,28 @@ public class Game implements Runnable{
 	Thread thread;
 	
 	JFrame frame;
-	GamePanel gamePanel;
-	JPanel actionPanel;
+	public GamePanel gamePanel;
 	JPanel topPanel;
+	public ActionPanel actionPanel;
 	JPanel bottomPanel;
+	public GlobalActionPanel globalActionPanel;
 	JSplitPane actionSplitPane;
 	JSplitPane bottomSplitPane;
 	JSplitPane rightSplitPane;
 	JScrollPane scrollPane;
 	JTextArea gameLogger;
-	
-	JLabel currentPlayerLabel;
-	JLabel cardSelectedLabel;
-	JComboBox<GroupCard> cardSelectedList;
-	JButton attackToControlButton;
-	JButton attackToNeutralizeButton;
-	JButton attackToDestroyButton;
-	JButton transferMoneyButton;
-	JButton moveGroupButton;
-	JButton dropGroupButton;
-	JButton transferPowerButton;
-	
-	JLabel viewLabel;
-	JComboBox<Object> viewList;
-	JButton illuminatiAbilityButton;
-	JButton endTurnButton;
+	GameInput input;
 	
 	ArrayList<Player> players;
+	int playerIndex = 0;
 	ArrayList<IlluminatiCard> illuminatiCards;
 	ArrayList<Card> deck;
+	ArrayList<GroupCard> uncontrolled;
 	ArrayList<Card> discardPile;
 	
 	@Override
 	public void run() {
-		// Game main process
+		// Game prep
 		init();
 		configureWindow();
 		notifyStartup();
@@ -71,17 +57,25 @@ public class Game implements Runnable{
 		shufflePlayers();
 		assignIlluminatiCards();
 		setupWindow();
+		shuffleDeck();
+		
+		// Main game process
+		populateMinimumUncontrolled();
+		
 	}
 	
 	private void setupWindow() {
-		// setup window for every player
-		cardSelectedList.addItem(players.get(0).getControlledGroups().get(0));
+		actionPanel.updatePlayer(players.get(0));
+		globalActionPanel.addPlayerList(players);
+	}
+	
+	void shuffleDeck() {
+		Collections.shuffle(deck);
 	}
 
 	private void assignIlluminatiCards() {
 		
 		// Assign random illuminati cards and add initial income
-		
 		Collections.shuffle(illuminatiCards);
 		for(Player p : players) {
 			IlluminatiCard card = illuminatiCards.remove(0);
@@ -116,14 +110,18 @@ public class Game implements Runnable{
 	
 	void init() {
 		// Initialize
+		input = new GameInput(this);
 		deck = new ArrayList<Card>();
 		discardPile = new ArrayList<Card>();
+		uncontrolled = new ArrayList<GroupCard>();
 		illuminatiCards = new ArrayList<IlluminatiCard>();
 		frame = new JFrame("Illuminati - Lucky7");
-		actionPanel = new JPanel();
-		gamePanel = new GamePanel();
+		frame.setIconImage(new ImageIcon("res/illuminati_icon.png").getImage());
+		gamePanel = new GamePanel(this);
 		topPanel = new JPanel();
+		actionPanel = new ActionPanel(input);
 		bottomPanel = new JPanel();
+		globalActionPanel = new GlobalActionPanel(input);
 		gamePanel.setPreferredSize(new Dimension(900, 650));
 		gameLogger = new JTextArea();
 		gameLogger.setEditable(false);
@@ -133,49 +131,33 @@ public class Game implements Runnable{
 		bottomSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, gamePanel, scrollPane);
 		rightSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, bottomSplitPane, actionSplitPane);
 		
-		currentPlayerLabel = new JLabel();
-		currentPlayerLabel.setFont(new Font("Arial", Font.BOLD, 24));
-		currentPlayerLabel.setForeground(Color.BLUE);
-		cardSelectedLabel = new JLabel("Card Selected:");
-		viewLabel = new JLabel("View:");
-		cardSelectedList = new JComboBox<GroupCard>();
-		viewList = new JComboBox<Object>();
-		viewList.setMaximumSize(new Dimension(200, 30));
-		attackToControlButton = new JButton("Attack to Control");
-		attackToNeutralizeButton = new JButton("Attack to Neutralize");
-		attackToDestroyButton = new JButton("Attack to Destroy");
-		transferMoneyButton = new JButton("Transfer Money");
-		moveGroupButton = new JButton("Move Group");
-		dropGroupButton = new JButton("Drop Group");
-		transferPowerButton = new JButton("Transfer Power");
-		illuminatiAbilityButton = new JButton("Use Illuminati Ability");
-		illuminatiAbilityButton.setMaximumSize(new Dimension(300,30));
-		endTurnButton = new JButton("End Turn");
-		endTurnButton.setMaximumSize(new Dimension(300,30));
+		// Configure Logger
+		gameLogger.setBackground(new Color(60,60,60));
+		gameLogger.setForeground(Color.WHITE);
 		
 		// Configure top panel
-		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
-		topPanel.add(currentPlayerLabel);
-		topPanel.add(cardSelectedLabel);
-		topPanel.add(cardSelectedList);
-		topPanel.add(attackToControlButton);
-		topPanel.add(attackToNeutralizeButton);
-		topPanel.add(attackToDestroyButton);
-		topPanel.add(transferMoneyButton);
-		topPanel.add(moveGroupButton);
-		topPanel.add(dropGroupButton);
-		topPanel.add(transferPowerButton);
+		topPanel.add(actionPanel);
+		topPanel.setBackground(new Color(60,60,60));
 		
 		// Configure bottom panel
-		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
-		bottomPanel.add(viewLabel);
-		bottomPanel.add(viewList);
-		bottomPanel.add(illuminatiAbilityButton);
-		bottomPanel.add(endTurnButton);
+		bottomPanel.add(globalActionPanel);
+		bottomPanel.setBackground(new Color(60,60,60));
 		
-		actionSplitPane.setDividerSize(6);
-		bottomSplitPane.setDividerSize(6);
-		rightSplitPane.setDividerSize(6);
+		actionSplitPane.setDividerSize(2);
+		bottomSplitPane.setDividerSize(2);
+		rightSplitPane.setDividerSize(2);
+	}
+	
+	public void endTurn() {
+		addLog(players.get(playerIndex).getName() + " finished his turn.");
+		playerIndex = (playerIndex + 1) % players.size();
+		readyNextPlayer();
+	}
+	
+	public void resign() {
+		addLog(players.get(playerIndex).getName() + " has resigned!");
+		players.remove(playerIndex);
+		readyNextPlayer();
 	}
 	
 	int rollDice() {
@@ -201,8 +183,6 @@ public class Game implements Runnable{
 	void addLog(String message) {
 		// Add message
 		gameLogger.append(message + "\n");
-		// Scroll to bottom of log
-		scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
 	}
 	
 	void notifyStartup() {
@@ -213,6 +193,22 @@ public class Game implements Runnable{
 		}
 	}
 	
+	void populateMinimumUncontrolled() {
+		while(uncontrolled.size() < 4) {
+			Card card = deck.remove(0);
+			if(card instanceof GroupCard) {
+				addLog("Added \"" + card.getName() + "\" to uncontrolled groups.");
+				uncontrolled.add((GroupCard)card);
+			}else {
+				deck.add(card);
+			}
+		}
+	}
+	
+	void readyNextPlayer() {
+		actionPanel.updatePlayer(players.get(playerIndex));
+	}
+	
 	void shufflePlayers() {
 		Collections.shuffle(players);
 		// Display order of players in logger
@@ -220,12 +216,6 @@ public class Game implements Runnable{
 		for(int i = 0; i < players.size(); i++) {
 			addLog(String.valueOf(i + 1) + ". " + players.get(i));
 		}
-		currentPlayerLabel.setText(players.get(0).getName());
-		
-		for(Player p : players) {
-			viewList.addItem(p.getName());
-		}
-		viewList.addItem("Uncontrolled Groups");
 	}
 	
 	void loadCards() {
@@ -240,9 +230,33 @@ public class Game implements Runnable{
 		illuminatiCards.add(new TheBermudaTriangle());
 		
 		// Group Cards
+		deck.add(new Airlines());
+		deck.add(new AlienAbductors());
 		deck.add(new AmericanAutoduelAssociation());
+		deck.add(new Antifa());
 		deck.add(new AntiNuclearActivists());
+		deck.add(new AntiWarActivists());
+		deck.add(new ArmsSmugglers());
+		deck.add(new BigMedia());
+		deck.add(new Bloggers());
+		deck.add(new BoySprouts());
+		deck.add(new CableCompanies());
+		deck.add(new California());
+		deck.add(new ChainLetters());
+		deck.add(new CIA());
 		deck.add(new CloneArrangers());
+		deck.add(new CoffeeShops());
+		deck.add(new CongressionalWives());
+		deck.add(new ConvenienceStores());
+		deck.add(new Cosplayers());
+		deck.add(new CycleGangs());
+		deck.add(new Democrats());
+		deck.add(new EcoGuerrillas());
+		deck.add(new EvilGeniusesForABetterTomorrow());
+		deck.add(new FastFoodChains());
+		deck.add(new FBI());
+		deck.add(new FederalReserve());
+		
 		// Ability Cards
 		deck.add(new Assassination());
 		deck.add(new Bribery());

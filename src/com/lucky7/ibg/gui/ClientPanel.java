@@ -2,6 +2,7 @@ package com.lucky7.ibg.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -67,8 +68,8 @@ public class ClientPanel extends JPanel{
 	void init() {
 		// Initializes objects
 		navigator = new ScreenNavigator(this);
-		playButton = new JButton("Play");
-		exitButton = new JButton("Exit");
+		playButton = new JButton("PLAY");
+		exitButton = new JButton("EXIT");
 		backButton = new JButton("Back");
 		startGameButton = new JButton("Start Game");
 		instructions = new JTextArea();
@@ -105,6 +106,26 @@ public class ClientPanel extends JPanel{
 		exitButton.addActionListener(navigator);
 		backButton.addActionListener(navigator);
 		startGameButton.addActionListener(navigator);
+		
+		// Configure buttons
+		playButton.setPreferredSize(new Dimension(160, 40));
+		exitButton.setPreferredSize(new Dimension(160, 40));
+		
+		playButton.setBackground(new Color(0, 102, 13));
+		playButton.setForeground(Color.white);
+		playButton.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		exitButton.setBackground(new Color(0, 102, 13));
+		exitButton.setForeground(Color.white);
+		exitButton.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		backButton.setBackground(new Color(0, 102, 13));
+		backButton.setForeground(Color.white);
+		backButton.setFont(new Font("Arial", Font.BOLD, 12));
+		
+		startGameButton.setBackground(new Color(0, 102, 13));
+		startGameButton.setForeground(Color.white);
+		startGameButton.setFont(new Font("Arial", Font.BOLD, 12));
 	}
 	
 	void addComponents() {
