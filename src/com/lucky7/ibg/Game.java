@@ -20,6 +20,7 @@ import com.lucky7.ibg.card.special.*;
 import com.lucky7.ibg.gui.ActionPanel;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.gui.GlobalActionPanel;
+import com.lucky7.ibg.input.GameInput;
 import com.lucky7.ibg.player.Player;
 
 public class Game implements Runnable{
@@ -29,14 +30,15 @@ public class Game implements Runnable{
 	JFrame frame;
 	GamePanel gamePanel;
 	JPanel topPanel;
-	ActionPanel actionPanel;
+	public ActionPanel actionPanel;
 	JPanel bottomPanel;
-	GlobalActionPanel globalActionPanel;
+	public GlobalActionPanel globalActionPanel;
 	JSplitPane actionSplitPane;
 	JSplitPane bottomSplitPane;
 	JSplitPane rightSplitPane;
 	JScrollPane scrollPane;
 	JTextArea gameLogger;
+	GameInput input;
 	
 	ArrayList<Player> players;
 	ArrayList<IlluminatiCard> illuminatiCards;
@@ -97,6 +99,7 @@ public class Game implements Runnable{
 	
 	void init() {
 		// Initialize
+		input = new GameInput(this);
 		deck = new ArrayList<Card>();
 		discardPile = new ArrayList<Card>();
 		illuminatiCards = new ArrayList<IlluminatiCard>();
@@ -104,9 +107,9 @@ public class Game implements Runnable{
 		frame.setIconImage(new ImageIcon("res/illuminati_icon.png").getImage());
 		gamePanel = new GamePanel();
 		topPanel = new JPanel();
-		actionPanel = new ActionPanel();
+		actionPanel = new ActionPanel(input);
 		bottomPanel = new JPanel();
-		globalActionPanel = new GlobalActionPanel();
+		globalActionPanel = new GlobalActionPanel(input);
 		gamePanel.setPreferredSize(new Dimension(900, 650));
 		gameLogger = new JTextArea();
 		gameLogger.setEditable(false);

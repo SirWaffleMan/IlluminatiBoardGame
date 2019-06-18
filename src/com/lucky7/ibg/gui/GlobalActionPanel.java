@@ -13,18 +13,21 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.lucky7.ibg.input.GameInput;
 import com.lucky7.ibg.player.Player;
 
 public class GlobalActionPanel extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 	
+	GameInput input;
 	public JLabel viewLabel;
 	public JComboBox<Object> viewList;
 	public JButton endTurnButton;
 	public JButton resignButton;
 	
-	public GlobalActionPanel() {
+	public GlobalActionPanel(GameInput input) {
+		this.input = input;
 		init();
 		configure();
 	}
@@ -64,11 +67,13 @@ public class GlobalActionPanel extends JPanel{
 		endTurnButton.setBackground(new Color(170, 0, 0));
 		endTurnButton.setForeground(Color.white);
 		endTurnButton.setFont(new Font("Arial", Font.BOLD, 12));
+		endTurnButton.addActionListener(input);
 		
 		resignButton.setPreferredSize(new Dimension(150, 28));
 		resignButton.setBackground(new Color(170, 0, 0));
 		resignButton.setForeground(Color.white);
 		resignButton.setFont(new Font("Arial", Font.BOLD, 12));
+		resignButton.addActionListener(input);
 		
 		setOpaque(false);
 	}
