@@ -232,14 +232,28 @@ public class Game implements Runnable{
 		
 		// Group Cards
 		deck.add(new Airlines());
+		deck.add(new AlienAbductors());
 		deck.add(new AmericanAutoduelAssociation());
 		deck.add(new Antifa());
 		deck.add(new AntiNuclearActivists());
 		deck.add(new AntiWarActivists());
 		deck.add(new ArmsSmugglers());
 		deck.add(new BigMedia());
+		deck.add(new Bloggers());
 		deck.add(new BoySprouts());
+		deck.add(new CableCompanies());
+		deck.add(new California());
+		deck.add(new ChainLetters());
+		deck.add(new CIA());
 		deck.add(new CloneArrangers());
+		deck.add(new CoffeeShops());
+		deck.add(new CongressionalWives());
+		deck.add(new ConvenienceStores());
+		deck.add(new Cosplayers());
+		deck.add(new CycleGangs());
+		deck.add(new Democrats());
+		deck.add(new EcoGuerrillas());
+		deck.add(new EvilGeniusesForABetterTomorrow());
 		
 		// Ability Cards
 		deck.add(new Assassination());
