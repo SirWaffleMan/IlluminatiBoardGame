@@ -1,5 +1,12 @@
 package com.lucky7.ibg.card.group;
 
-public class FEMA {
+import com.lucky7.ibg.card.Alignments;
 
+public class FEMA extends GroupCard{
+
+	public FEMA() {
+		super("FEMA", 4, 3, 4, 3);
+		addAlignment(Alignments.Peaceful);
+	}
+	
 }
