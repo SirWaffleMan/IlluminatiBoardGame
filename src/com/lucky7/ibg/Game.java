@@ -262,6 +262,18 @@ public class Game implements Runnable{
 		deck.add(new FnordMotorCompany());
 		deck.add(new FraternalOrders());
 		deck.add(new GoldfishFanciers());
+		deck.add(new GunLobby());
+		deck.add(new Hackers());
+		deck.add(new HealthFoodStores());
+		deck.add(new HighFashion());
+		deck.add(new Hipsters());
+		deck.add(new Hollywood());
+		deck.add(new InternationalDrugSmugglers());
+		deck.add(new InternetPrOn());
+		deck.add(new IRS());
+		deck.add(new JunkMail());
+
+		
 
 		
 		
