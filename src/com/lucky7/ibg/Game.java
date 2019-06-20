@@ -261,6 +261,7 @@ public class Game implements Runnable{
 		deck.add(new FlatEarthers());
 		deck.add(new FnordMotorCompany());
 		deck.add(new FraternalOrders());
+		deck.add(new GoldfishFanciers());
 
 		
 		
