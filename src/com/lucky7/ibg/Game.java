@@ -256,6 +256,14 @@ public class Game implements Runnable{
 		deck.add(new FastFoodChains());
 		deck.add(new FBI());
 		deck.add(new FederalReserve());
+		deck.add(new FEMA());
+		deck.add(new FiendishFluidators());
+		deck.add(new FlatEarthers());
+		deck.add(new FnordMotorCompany());
+		deck.add(new FraternalOrders());
+		deck.add(new GoldfishFanciers());
+
+		
 		
 		// Ability Cards
 		deck.add(new Assassination());
