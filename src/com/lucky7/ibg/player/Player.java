@@ -10,11 +10,9 @@ public class Player {
 	String name;
 	IlluminatiCard illuminatiCard;
 	ArrayList<GroupCard> controlledGroups;
-	boolean isCPU;
 	
-	public Player(String name, boolean isCPU) {
+	public Player(String name) {
 		this.name = name;
-		this.isCPU = isCPU;
 		this.controlledGroups = new ArrayList<GroupCard>();
 	}
 	
@@ -24,10 +22,6 @@ public class Player {
 	
 	public String getName() {
 		return name;
-	}
-	
-	public boolean isCPU() {
-		return isCPU;
 	}
 	
 	public void addIncome() {

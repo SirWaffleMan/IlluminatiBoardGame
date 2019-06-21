@@ -1,9 +1,14 @@
 package com.lucky7.ibg.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +19,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import com.lucky7.ibg.Game;
@@ -35,10 +39,11 @@ public class ClientPanel extends JPanel{
 	public JButton backButton;
 	public JButton startGameButton;
 	public JPanel playMenuPanel;
-	public JScrollPane scrollPane;
+	public JPanel Panel;
 	public PlayerTextField[] playerField;
-	public JTextArea instructions;
+	//public JTextArea instructions;
 	public JLabel status;
+	public JLabel ScrollLabel;
 	
 	// Images
 	BufferedImage illuminati_img;
@@ -72,32 +77,39 @@ public class ClientPanel extends JPanel{
 		exitButton = new JButton("EXIT");
 		backButton = new JButton("Back");
 		startGameButton = new JButton("Start Game");
-		instructions = new JTextArea();
-		instructions.setText("Instructions:\n"
-							+ "Please enter name of the player and check box if the player is a CPU.\n"
-							+"Leave the fields blank if you don't want anymore players.\n"
-							+"Press \"Start Game\" when you are ready to play the game.");
-		instructions.setPreferredSize(new Dimension(380, 130));
-		instructions.setEditable(false);
-		instructions.setLineWrap(true);
+		//instructions = new JTextArea();
+		//instructions.setText("Instructions:\n"
+							//+ "Please enter name of the player and check box if the player is a CPU.\n"
+							//+"Leave the fields blank if you don't want anymore players.\n"
+							//+"Press \"Start Game\" when you are ready to play the game.");
+		//instructions.setPreferredSize(new Dimension(380, 130));
+		//instructions.setEditable(false);
+		//instructions.setLineWrap(true);
+		ScrollLabel = new JLabel("  Name: ");
 		status = new JLabel();
 		status.setForeground(Color.RED);
 		status.setText("A minimum of 2 players is required.");
 		status.setVisible(false);
 		playMenuPanel = new JPanel();
 		
-		playerField = new PlayerTextField[7];
+		playerField = new PlayerTextField[6];
 		JPanel p = new JPanel();
-		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+		p.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		p.add(ScrollLabel, gbc);
+		gbc.anchor = GridBagConstraints.CENTER;
 		for(int i = 0; i < playerField.length; i++) {
 			playerField[i] = new PlayerTextField();
-			p.add(playerField[i]);
+			gbc.gridy = i + 1;
+			p.add(playerField[i], gbc);
 		}
-		scrollPane = new JScrollPane(p, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
 		playMenuPanel.add(backButton);
 		playMenuPanel.add(startGameButton);
-		playMenuPanel.add(scrollPane);
-		playMenuPanel.add(instructions);
+		playMenuPanel.add(p);
 		playMenuPanel.add(status);
 		playMenuPanel.setPreferredSize(new Dimension(400, 460));
 		
@@ -161,9 +173,10 @@ public class ClientPanel extends JPanel{
 	public ArrayList<Player> getPlayers(){
 		ArrayList<Player> players = new ArrayList<Player>();
 		
-		for(int i = 0; i < playerField.length; i++) {
+		for(int i = 0; i < playerField.length; i++) 
+		{
 			if(!playerField[i].getName().equals("")) {
-				players.add(new Player(playerField[i].getName(), playerField[i].isCPU()));
+				players.add(new Player(playerField[i].getName()));
 			}
 		}
 		
