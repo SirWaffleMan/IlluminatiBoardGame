@@ -17,11 +17,11 @@ public class GameInput implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == game.actionPanel.attackToControlButton) {
-			System.out.println("Attack To Control Button");
+			game.attackToControl();
 		}else if(e.getSource() == game.actionPanel.attackToDestroyButton) {
-			System.out.println("Attack To Destroy Button");
+			game.attackToDestory();
 		}else if(e.getSource() == game.actionPanel.attackToNeutralizeButton) {
-			System.out.println("Attack To Neutralize Button");
+			game.attackToNeutralize();
 		}else if(e.getSource() == game.actionPanel.transferMoneyButton) {
 			System.out.println("Transfer Money Button");
 		}else if(e.getSource() == game.actionPanel.moveGroupButton) {
