@@ -275,6 +275,43 @@ public class Game implements Runnable{
 		deck.add(new FnordMotorCompany());
 		deck.add(new FraternalOrders());
 		deck.add(new GoldfishFanciers());
+		deck.add(new GunLobby());
+		deck.add(new Hackers());
+		deck.add(new HealthFoodStores());
+		deck.add(new HighFashion());
+		deck.add(new Hipsters());
+		deck.add(new Hollywood());
+		deck.add(new InternationalDrugSmugglers());
+		deck.add(new InternetPrOn());
+		deck.add(new IRS());
+		deck.add(new JunkMail());
+		deck.add(new L4Society());
+		deck.add(new Libertarians());
+		deck.add(new LoanSharks());
+		deck.add(new LocalPoliceDepartments());
+		deck.add(new MadisonAvenue());
+		deck.add(new Militias());
+		deck.add(new MoralMinority());
+		deck.add(new Morticians());
+		deck.add(new MultinationalOilCompanies());
+		deck.add(new NewYork());
+		deck.add(new NuclearPowerCompanies());
+		deck.add(new OnlineVideos());
+		deck.add(new OrbitalMindControlLasers());
+		deck.add(new PalePeopleInBlack());
+		deck.add(new ParentTeacherAgglomeration());
+		deck.add(new Pentagon());
+		deck.add(new PostOffice());
+		deck.add(new Preppers());
+		deck.add(new ProfessionalSports());
+		deck.add(new IRS());
+		deck.add(new IRS());
+		deck.add(new IRS());
+
+		
+
+
+		
 
 		
 		
