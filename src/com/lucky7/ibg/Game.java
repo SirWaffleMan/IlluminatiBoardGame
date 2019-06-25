@@ -18,6 +18,7 @@ import com.lucky7.ibg.card.group.*;
 import com.lucky7.ibg.card.illuminati.*;
 import com.lucky7.ibg.card.special.*;
 import com.lucky7.ibg.gui.ActionPanel;
+import com.lucky7.ibg.gui.AttackWindow;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.gui.GlobalActionPanel;
 import com.lucky7.ibg.input.GameInput;
@@ -27,7 +28,7 @@ public class Game implements Runnable{
 	
 	Thread thread;
 	
-	JFrame frame;
+	public JFrame frame;
 	public GamePanel gamePanel;
 	JPanel topPanel;
 	public ActionPanel actionPanel;
@@ -44,7 +45,7 @@ public class Game implements Runnable{
 	int playerIndex = 0;
 	ArrayList<IlluminatiCard> illuminatiCards;
 	ArrayList<Card> deck;
-	ArrayList<GroupCard> uncontrolled;
+	public ArrayList<GroupCard> uncontrolled;
 	ArrayList<Card> discardPile;
 	
 	@Override
@@ -71,6 +72,18 @@ public class Game implements Runnable{
 	
 	void shuffleDeck() {
 		Collections.shuffle(deck);
+	}
+	
+	public void attackToControl() {
+		new AttackWindow(this);
+	}
+	
+	public void attackToNeutralize() {
+		new AttackWindow(this);
+	}
+	
+	public void attackToDestory() {
+		new AttackWindow(this);
 	}
 
 	private void assignIlluminatiCards() {
@@ -175,7 +188,7 @@ public class Game implements Runnable{
 		frame.pack();
 		bottomSplitPane.setDividerLocation(0.8);
 		rightSplitPane.setDividerLocation(0.78);
-		actionSplitPane.setDividerLocation(0.5);
+		actionSplitPane.setDividerLocation(0.55);
 		gamePanel.setFocusable(true);
 		gamePanel.requestFocusInWindow();
 	}
@@ -256,6 +269,14 @@ public class Game implements Runnable{
 		deck.add(new FastFoodChains());
 		deck.add(new FBI());
 		deck.add(new FederalReserve());
+		deck.add(new FEMA());
+		deck.add(new FiendishFluidators());
+		deck.add(new FlatEarthers());
+		deck.add(new FnordMotorCompany());
+		deck.add(new FraternalOrders());
+		deck.add(new GoldfishFanciers());
+
+		
 		
 		// Ability Cards
 		deck.add(new Assassination());
