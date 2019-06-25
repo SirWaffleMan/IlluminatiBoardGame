@@ -2,6 +2,7 @@ package com.lucky7.ibg;
 
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import com.lucky7.ibg.gui.ClientPanel;
@@ -28,6 +29,7 @@ public class Main {
 	static void configureWindow() {
 		// Setup Window
 		frame.setTitle("Illuminati Client - Lucky7");
+		frame.setIconImage(new ImageIcon("res/lucky7_icon.png").getImage());
 		clientPanel.setPreferredSize(new Dimension(600, 500));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(clientPanel);
