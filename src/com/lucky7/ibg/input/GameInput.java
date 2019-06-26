@@ -29,7 +29,7 @@ public class GameInput implements ActionListener{
 		}else if(e.getSource() == game.actionPanel.dropGroupButton) {
 			System.out.println("Drop Group Button");
 		}else if(e.getSource() == game.actionPanel.transferPowerButton) {
-			System.out.println("Transfer Power Button");
+			game.transferPower();
 		}else if(e.getSource() == game.actionPanel.useAbilityButton) {
 			System.out.println("Use Ability Button");
 		}else if(e.getSource() == game.globalActionPanel.endTurnButton) {
