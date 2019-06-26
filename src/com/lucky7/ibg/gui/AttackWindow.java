@@ -133,6 +133,7 @@ public class AttackWindow extends JFrame{
 			game.addLog("Attack was not successful!");
 		}
 		
+		game.actionPanel.updatePlayer(player);
 		game.gamePanel.repaint();
 		
 		dispose();
