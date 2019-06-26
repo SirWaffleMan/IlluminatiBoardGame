@@ -111,7 +111,7 @@ public class ClientPanel extends JPanel{
 		playMenuPanel.add(startGameButton);
 		playMenuPanel.add(p);
 		playMenuPanel.add(status);
-		playMenuPanel.setPreferredSize(new Dimension(400, 460));
+		playMenuPanel.setPreferredSize(new Dimension(400, 300));
 		
 		// Add listeners
 		playButton.addActionListener(navigator);
