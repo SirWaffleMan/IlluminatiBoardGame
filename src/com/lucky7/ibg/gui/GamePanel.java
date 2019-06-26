@@ -2,7 +2,11 @@ package com.lucky7.ibg.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.lucky7.ibg.Game;
@@ -14,9 +18,15 @@ public class GamePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	Game game;
+	BufferedImage eye;
 	
 	public GamePanel(Game g) {
 		this.game = g;
+		try {
+			eye = ImageIO.read(new File("res/illuminati_eye.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -44,30 +54,34 @@ public class GamePanel extends JPanel{
 	}
 	
 	private void renderPowerStructure(PowerStructure ps, Graphics g) {
-		renderCard(ps.getControlledGroups().get(0), getWidth()/2 - 20, getHeight()/2 - 20, g);
+		renderCard(ps.getControlledGroups().get(0), getWidth()/2 - 28, getHeight()/2 - 28, g);
 	}
 	
 	private void renderCard(GroupCard card, int x, int y, Graphics g) {
 		
-		final int w = 40;
-		final int h = 40;
+		final int w = 56;
+		final int h = 56;
 		final int s = 5;
 		
-		g.fillRect(x, y, w, h);
-		
+		g.drawImage(eye, x, y, w, h, this);
+		g.setColor(Color.YELLOW);
 		if(card.getTopCard() != null) {
+			g.fillRect(x,y-s,w,s);
 			renderCard(card.getTopCard(), x, y-h-s, g);
 		}
 		
 		if(card.getRightCard() != null) {
+			g.fillRect(x+w, y, s, h);
 			renderCard(card.getRightCard(), x+w+s, y, g);
 		}
 		
 		if(card.getBottomCard() != null) {
+			g.fillRect(x, y+h, w, s);
 			renderCard(card.getBottomCard(), x, y+h+s, g);
 		}
 		
 		if(card.getLeftCard() != null) {
+			g.fillRect(x-s, y, s, h);
 			renderCard(card.getLeftCard(), x-w-s, y, g);
 		}
 		
