@@ -19,6 +19,7 @@ import com.lucky7.ibg.card.illuminati.*;
 import com.lucky7.ibg.card.special.*;
 import com.lucky7.ibg.gui.ActionPanel;
 import com.lucky7.ibg.gui.AttackWindow;
+import com.lucky7.ibg.gui.TransferWindow;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.gui.GlobalActionPanel;
 import com.lucky7.ibg.input.GameInput;
@@ -84,6 +85,10 @@ public class Game implements Runnable{
 	
 	public void attackToDestory() {
 		new AttackWindow(this);
+	}
+	
+	public void transferMoney() {
+		new TransferWindow(this);
 	}
 
 	private void assignIlluminatiCards() {

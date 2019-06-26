@@ -23,7 +23,7 @@ public class GameInput implements ActionListener{
 		}else if(e.getSource() == game.actionPanel.attackToNeutralizeButton) {
 			game.attackToNeutralize();
 		}else if(e.getSource() == game.actionPanel.transferMoneyButton) {
-			System.out.println("Transfer Money Button");
+			game.transferMoney();
 		}else if(e.getSource() == game.actionPanel.moveGroupButton) {
 			System.out.println("Move Group Button");
 		}else if(e.getSource() == game.actionPanel.dropGroupButton) {
