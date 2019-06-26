@@ -36,6 +36,7 @@ public class PowerStructure {
 		switch(side) {
 		case TOP:
 			rootCard.attachTop(leafCard);
+			break;
 		case BOTTOM:
 			rootCard.attachBottom(leafCard);
 			break;
