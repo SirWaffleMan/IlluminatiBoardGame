@@ -347,10 +347,6 @@ public class Game implements Runnable{
 		deck.add(new IRS());
 		deck.add(new IRS());
 		deck.add(new IRS());
-
-		
-
-
 		deck.add(new TheMafia());
 		deck.add(new TheMenInBlack());
 		deck.add(new TheUnitedNations());
