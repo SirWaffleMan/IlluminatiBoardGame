@@ -291,9 +291,19 @@ public class Game implements Runnable{
 		deck.add(new PostOffice());
 		deck.add(new Preppers());
 		deck.add(new ProfessionalSports());
-		deck.add(new IRS());
-		deck.add(new IRS());
-		deck.add(new IRS());
+		deck.add(new PublicArt());
+		deck.add(new Psychiatrists());
+		deck.add(new PunkRockers());
+		deck.add(new ForwardEmails());
+		deck.add(new Recyclers());
+		deck.add(new Republicans());
+		deck.add(new RobotSeaMonsters());
+		deck.add(new RussianCampaignDonors());
+		deck.add(new SciFiFans());
+		deck.add(new SemiconsciousLiberationArmy());
+		deck.add(new Spammers());
+		deck.add(new Tabloids());
+		deck.add(new Texas());
 
 		
 
