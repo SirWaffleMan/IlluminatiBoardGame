@@ -47,7 +47,7 @@ public class TransferWindow extends JFrame{
 		groupList.addItem("2");
 		groupList.addItem("3");
 		groupList.addItem("4");
-		groupList.setPreferredSize(new Dimension(100,20));
+		groupList.setPreferredSize(new Dimension(200,20));
 		
 		int min = 0;
 		int max = 15;

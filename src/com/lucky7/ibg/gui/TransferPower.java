@@ -47,14 +47,14 @@ public class TransferPower extends JFrame{
 		groupList1.addItem("2");
 		groupList1.addItem("3");
 		groupList1.addItem("4");
-		groupList1.setPreferredSize(new Dimension(100,20));
+		groupList1.setPreferredSize(new Dimension(200,20));
 		
 		groupList2 = new JComboBox<String>();
 		groupList2.addItem("1");
 		groupList2.addItem("2");
 		groupList2.addItem("3");
 		groupList2.addItem("4");
-		groupList2.setPreferredSize(new Dimension(100,20));
+		groupList2.setPreferredSize(new Dimension(200,20));
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.NORTH;

@@ -64,9 +64,8 @@ public class AttackWindow extends JFrame{
 		placementList.addItem("Bottom");
 		placementList.addItem("Left");
 		
-		//panel.setPreferredSize(new Dimension(400, 300));
-		uncontrolledList.setPreferredSize(new Dimension(100,20));
-		placementList.setPreferredSize(new Dimension(100,20));
+		uncontrolledList.setPreferredSize(new Dimension(200,20));
+		placementList.setPreferredSize(new Dimension(200,20));
 		
 		
 		GridBagConstraints gbc = new GridBagConstraints();
