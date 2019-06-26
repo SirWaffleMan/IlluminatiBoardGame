@@ -311,7 +311,15 @@ public class Game implements Runnable{
 		
 
 
-		
+		deck.add(new TheMafia());
+		deck.add(new TheMenInBlack());
+		deck.add(new TheUnitedNations());
+		deck.add(new TobaccoAndLiquorCompanies());
+		deck.add(new TriliberalCommission());
+		deck.add(new TVPreachers());
+		deck.add(new UndergroundMedia());
+		deck.add(new VideoGames());
+		deck.add(new Vloggers());
 
 		
 		
