@@ -13,7 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.lucky7.ibg.Game;
+import com.lucky7.ibg.card.group.GroupCard;
+import com.lucky7.ibg.card.group.SourceDirection;
 import com.lucky7.ibg.input.AttackInput;
+import com.lucky7.ibg.player.Player;
+import com.lucky7.ibg.player.PowerStructure;
 
 
 public class AttackWindow extends JFrame{
@@ -27,7 +31,7 @@ public class AttackWindow extends JFrame{
 	JLabel rollLabel;
 	public JButton enactAttackButton;
 	AttackInput input;
-	public JComboBox<String> uncontrolledList;
+	public JComboBox<GroupCard> uncontrolledList;
 	public JComboBox<String> placementList;
 	
 	
@@ -47,12 +51,12 @@ public class AttackWindow extends JFrame{
 		panel = new JPanel();
 		panel.setBackground(new Color(60,60,60));
 		panel.setLayout(new GridBagLayout());
-		uncontrolledList = new JComboBox<String>();
+		uncontrolledList = new JComboBox<GroupCard>();
 		placementList = new JComboBox<String>();
 		
 		// TODO: Add other player's cards
 		for(int i = 0; i < game.uncontrolled.size(); i++) {
-			uncontrolledList.addItem(game.uncontrolled.get(i).getName());
+			uncontrolledList.addItem(game.uncontrolled.get(i));
 		}
 		
 		placementList.addItem("Top");
@@ -95,7 +99,41 @@ public class AttackWindow extends JFrame{
 
 
 	public void enactAttack() {
-		//TODO: Check if it's a card that player owns
+		
+		Player player = game.getCurrentPlayer();
+		PowerStructure ps = player.getPowerStructure();
+		GroupCard card = game.getSelectedCard();
+		GroupCard attackedCard = (GroupCard) uncontrolledList.getSelectedItem();
+		String placement = (String) placementList.getSelectedItem();
+		
+		SourceDirection direction = SourceDirection.NONE;
+		switch(placement) {
+		case "Top":
+			direction = SourceDirection.TOP;
+			break;
+		case "Right":
+			direction = SourceDirection.RIGHT;
+			break;
+		case "Bottom":
+			direction = SourceDirection.BOTTOM;
+			break;
+		case "Left":
+			direction = SourceDirection.LEFT;
+			break;
+		}
+		
+		
+		int roll = game.rollDice();
+		int target = 10;
+		
+		if(roll <= target && roll < 11) {
+			game.addLog("Attack was successful!");
+			player.addCardToPowerStructure(card, attackedCard, direction);
+		}else {
+			game.addLog("Attack was not successful!");
+		}
+		
+		game.gamePanel.repaint();
 		
 		dispose();
 	}

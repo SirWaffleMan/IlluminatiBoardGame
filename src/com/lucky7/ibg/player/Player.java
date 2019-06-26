@@ -20,6 +20,10 @@ public class Player {
 		return powerStructure.getControlledGroups();
 	}
 	
+	public PowerStructure getPowerStructure() {
+		return powerStructure;
+	}
+	
 	public String getName() {
 		return name;
 	}

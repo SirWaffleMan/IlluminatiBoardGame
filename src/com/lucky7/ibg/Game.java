@@ -96,6 +96,20 @@ public class Game implements Runnable{
 		new TransferPower(this);
 	}
 	
+	public Player getCurrentPlayer() {
+		return players.get(playerIndex);
+	}
+	
+	public Player getViewingPlayer() {
+		String playerName = (String)globalActionPanel.viewList.getSelectedItem();
+		for(Player p : players) {
+			if(p.getName().equals(playerName)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	private void assignIlluminatiCards() {
 		
 		// Assign random illuminati cards and add initial income
@@ -183,7 +197,7 @@ public class Game implements Runnable{
 		readyNextPlayer();
 	}
 	
-	int rollDice() {
+	public int rollDice() {
 		// Simulates the roll of two dice
 		Random random = new Random();
 		int dice1Value = random.nextInt(6) + 1;
@@ -203,9 +217,13 @@ public class Game implements Runnable{
 		gamePanel.requestFocusInWindow();
 	}
 	
-	void addLog(String message) {
+	public void addLog(String message) {
 		// Add message
 		gameLogger.append(message + "\n");
+	}
+	
+	public GroupCard getSelectedCard() {
+		return (GroupCard) actionPanel.cardSelectedList.getSelectedItem();
 	}
 	
 	void notifyStartup() {

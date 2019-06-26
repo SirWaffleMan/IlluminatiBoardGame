@@ -25,7 +25,7 @@ public class ActionPanel extends JPanel{
 	public JLabel currentPlayerLabel;
 	public JLabel actionsRemainingLabel;
 	public JLabel cardSelectedLabel;
-	JComboBox<GroupCard> cardSelectedList;
+	public JComboBox<GroupCard> cardSelectedList;
 	public JButton attackToControlButton;
 	public JButton attackToNeutralizeButton;
 	public JButton attackToDestroyButton;
