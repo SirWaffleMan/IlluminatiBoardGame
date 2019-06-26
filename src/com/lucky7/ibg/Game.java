@@ -103,7 +103,7 @@ public class Game implements Runnable{
 		for(Player p : players) {
 			IlluminatiCard card = illuminatiCards.remove(0);
 			addLog(p.getName() + " was assigned \"" + card.getName() + "\"");
-			p.addCardToPowerStructure(card);
+			p.addIlluminatiToPowerStructure(card);
 		}
 		
 		addLog("Adding initial income to all players...");
