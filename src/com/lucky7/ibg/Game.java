@@ -130,7 +130,6 @@ public class Game implements Runnable{
 		
 		for(int i = 0; i < players.size()-1; i++) {
 			for(int j = i+1; j < players.size(); j++) {
-				System.out.println(players.get(i).getName() + " " + players.get(j).getName());
 				if(players.get(i).getName().equals(players.get(j).getName())) {
 					return false;
 				}
@@ -260,6 +259,7 @@ public class Game implements Runnable{
 	
 	void readyNextPlayer() {
 		actionPanel.updatePlayer(players.get(playerIndex));
+		globalActionPanel.viewList.setSelectedIndex(playerIndex);
 	}
 	
 	void shufflePlayers() {
