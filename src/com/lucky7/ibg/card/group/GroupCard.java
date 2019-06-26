@@ -94,5 +94,26 @@ public abstract class GroupCard extends Card{
 	public void attachLeft(GroupCard card) {
 		leftCard = card;
 	}
+	
+	public GroupCard getTopCard() {
+		return topCard;
+	}
+	
+	public GroupCard getRightCard() {
+		return rightCard;
+	}
+	
+	public GroupCard getBottomCard() {
+		return bottomCard;
+	}
+	
+	public GroupCard getLeftCard() {
+		return leftCard;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 
 }

@@ -19,8 +19,10 @@ import com.lucky7.ibg.card.illuminati.*;
 import com.lucky7.ibg.card.special.*;
 import com.lucky7.ibg.gui.ActionPanel;
 import com.lucky7.ibg.gui.AttackWindow;
+import com.lucky7.ibg.gui.TransferWindow;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.gui.GlobalActionPanel;
+import com.lucky7.ibg.gui.TransferPower;
 import com.lucky7.ibg.input.GameInput;
 import com.lucky7.ibg.player.Player;
 
@@ -85,7 +87,29 @@ public class Game implements Runnable{
 	public void attackToDestory() {
 		new AttackWindow(this);
 	}
+	
+	public void transferMoney() {
+		new TransferWindow(this);
+	}
 
+	public void transferPower() {
+		new TransferPower(this);
+	}
+	
+	public Player getCurrentPlayer() {
+		return players.get(playerIndex);
+	}
+	
+	public Player getViewingPlayer() {
+		String playerName = (String)globalActionPanel.viewList.getSelectedItem();
+		for(Player p : players) {
+			if(p.getName().equals(playerName)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	private void assignIlluminatiCards() {
 		
 		// Assign random illuminati cards and add initial income
@@ -93,7 +117,7 @@ public class Game implements Runnable{
 		for(Player p : players) {
 			IlluminatiCard card = illuminatiCards.remove(0);
 			addLog(p.getName() + " was assigned \"" + card.getName() + "\"");
-			p.addCardToPowerStructure(card);
+			p.addIlluminatiToPowerStructure(card);
 		}
 		
 		addLog("Adding initial income to all players...");
@@ -173,7 +197,7 @@ public class Game implements Runnable{
 		readyNextPlayer();
 	}
 	
-	int rollDice() {
+	public int rollDice() {
 		// Simulates the roll of two dice
 		Random random = new Random();
 		int dice1Value = random.nextInt(6) + 1;
@@ -193,9 +217,13 @@ public class Game implements Runnable{
 		gamePanel.requestFocusInWindow();
 	}
 	
-	void addLog(String message) {
+	public void addLog(String message) {
 		// Add message
 		gameLogger.append(message + "\n");
+	}
+	
+	public GroupCard getSelectedCard() {
+		return (GroupCard) actionPanel.cardSelectedList.getSelectedItem();
 	}
 	
 	void notifyStartup() {
