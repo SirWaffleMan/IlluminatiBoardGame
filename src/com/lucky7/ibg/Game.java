@@ -22,6 +22,7 @@ import com.lucky7.ibg.gui.AttackWindow;
 import com.lucky7.ibg.gui.TransferWindow;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.gui.GlobalActionPanel;
+import com.lucky7.ibg.gui.TransferPower;
 import com.lucky7.ibg.input.GameInput;
 import com.lucky7.ibg.player.Player;
 
@@ -91,6 +92,10 @@ public class Game implements Runnable{
 		new TransferWindow(this);
 	}
 
+	public void transferPower() {
+		new TransferPower(this);
+	}
+	
 	private void assignIlluminatiCards() {
 		
 		// Assign random illuminati cards and add initial income

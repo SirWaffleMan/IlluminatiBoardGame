@@ -36,13 +36,16 @@ public class AttackWindow extends JFrame{
 		setLocationRelativeTo(g.frame);
 		input = new AttackInput(this);
 		attackLabel = new JLabel("Which group to attack?");
+		attackLabel.setForeground(Color.WHITE);
 		placementLabel = new JLabel("Where would you like to place?");
+		placementLabel.setForeground(Color.WHITE);
 		rollLabel = new JLabel("Roll: 10 or less");
-		rollLabel.setForeground(new Color(0, 100, 0));
+		rollLabel.setForeground(Color.RED);
 		
 		enactAttackButton = new JButton("Enact Attack");
 		enactAttackButton.addActionListener(input);
 		panel = new JPanel();
+		panel.setBackground(new Color(60,60,60));
 		panel.setLayout(new GridBagLayout());
 		uncontrolledList = new JComboBox<String>();
 		placementList = new JComboBox<String>();

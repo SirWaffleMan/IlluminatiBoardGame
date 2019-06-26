@@ -42,7 +42,8 @@ public class ActionPanel extends JPanel{
 		configure();
 	}
 	
-	public void updatePlayer(Player p) {
+	public void updatePlayer(Player p) 
+	{
 		this.currentPlayer = p;
 		currentPlayerLabel.setText(p.getName());
 		cardSelectedList.removeAllItems();

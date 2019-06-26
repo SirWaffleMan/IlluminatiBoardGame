@@ -1,5 +1,6 @@
 package com.lucky7.ibg.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -31,11 +32,14 @@ public class TransferWindow extends JFrame{
 		setLocationRelativeTo(g.frame);
 		input = new TransferInput(this);
 		transferLabel = new JLabel("Which group to transfer MB?");
+		transferLabel.setForeground(Color.WHITE);
 		amountLabel = new JLabel("How much to transfer?");
+		amountLabel.setForeground(Color.WHITE);
 		enactTransferButton = new JButton("Enact Transfer");
 		enactTransferButton.addActionListener(input);
 		
 		panel = new JPanel();
+		panel.setBackground(new Color(60,60,60));
 		panel.setLayout(new GridBagLayout());
 		
 		groupList = new JComboBox<String>();
@@ -54,6 +58,8 @@ public class TransferWindow extends JFrame{
 		mbSlider.setMinorTickSpacing(1);
 		mbSlider.setPaintTicks(true);
 		mbSlider.setPaintLabels(true);
+		mbSlider.setBackground(new Color(60,60,60));
+		mbSlider.setForeground(Color.WHITE);
 		
 		
 		GridBagConstraints gbc = new GridBagConstraints();
