@@ -127,9 +127,21 @@ public class Game implements Runnable{
 	}
 
 	public static boolean checkValidGame(ArrayList<Player> players) {
+		
+		for(int i = 0; i < players.size()-1; i++) {
+			for(int j = i+1; j < players.size(); j++) {
+				System.out.println(players.get(i).getName() + " " + players.get(j).getName());
+				if(players.get(i).getName().equals(players.get(j).getName())) {
+					return false;
+				}
+			}
+		}
+		
 		if(players.size() >= 2) {
 			return true;
 		}
+		
+		
 		return false;
 	}
 	
