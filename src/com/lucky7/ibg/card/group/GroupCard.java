@@ -21,7 +21,7 @@ public abstract class GroupCard extends Card{
 	protected GroupCard bottomCard;
 	protected GroupCard leftCard;
 	
-	protected SourceDirection source = SourceDirection.NONE;
+	protected SourceDirection source = SourceDirection.LEFT;
 
 	/*
 	 * If card does not have a certain attribute (the card doesn't have a power or resistance
