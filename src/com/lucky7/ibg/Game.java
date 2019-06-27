@@ -360,7 +360,7 @@ public class Game implements Runnable{
 		deck.add(new Spammers());
 		deck.add(new Tabloids());
 		deck.add(new Texas());
-    deck.add(new TheMafia());
+		deck.add(new TheMafia());
 		deck.add(new TheMenInBlack());
 		deck.add(new TheUnitedNations());
 		deck.add(new TobaccoAndLiquorCompanies());
