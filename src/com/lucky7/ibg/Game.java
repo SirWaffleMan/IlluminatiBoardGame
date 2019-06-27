@@ -18,8 +18,11 @@ import com.lucky7.ibg.card.group.*;
 import com.lucky7.ibg.card.illuminati.*;
 import com.lucky7.ibg.card.special.*;
 import com.lucky7.ibg.gui.ActionPanel;
+import com.lucky7.ibg.gui.AttackToControlWindow;
+import com.lucky7.ibg.gui.TransferWindow;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.gui.GlobalActionPanel;
+import com.lucky7.ibg.gui.TransferPower;
 import com.lucky7.ibg.input.GameInput;
 import com.lucky7.ibg.player.Player;
 
@@ -27,7 +30,7 @@ public class Game implements Runnable{
 	
 	Thread thread;
 	
-	JFrame frame;
+	public JFrame frame;
 	public GamePanel gamePanel;
 	JPanel topPanel;
 	public ActionPanel actionPanel;
@@ -44,7 +47,7 @@ public class Game implements Runnable{
 	int playerIndex = 0;
 	ArrayList<IlluminatiCard> illuminatiCards;
 	ArrayList<Card> deck;
-	ArrayList<GroupCard> uncontrolled;
+	public ArrayList<GroupCard> uncontrolled;
 	ArrayList<Card> discardPile;
 	
 	@Override
@@ -72,7 +75,41 @@ public class Game implements Runnable{
 	void shuffleDeck() {
 		Collections.shuffle(deck);
 	}
+	
+	public void attackToControl() {
+		new AttackToControlWindow(this);
+	}
+	
+	public void attackToNeutralize() {
+		new AttackToControlWindow(this);
+	}
+	
+	public void attackToDestory() {
+		new AttackToControlWindow(this);
+	}
+	
+	public void transferMoney() {
+		new TransferWindow(this);
+	}
 
+	public void transferPower() {
+		new TransferPower(this);
+	}
+	
+	public Player getCurrentPlayer() {
+		return players.get(playerIndex);
+	}
+	
+	public Player getViewingPlayer() {
+		String playerName = (String)globalActionPanel.viewList.getSelectedItem();
+		for(Player p : players) {
+			if(p.getName().equals(playerName)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	private void assignIlluminatiCards() {
 		
 		// Assign random illuminati cards and add initial income
@@ -80,7 +117,7 @@ public class Game implements Runnable{
 		for(Player p : players) {
 			IlluminatiCard card = illuminatiCards.remove(0);
 			addLog(p.getName() + " was assigned \"" + card.getName() + "\"");
-			p.addCardToPowerStructure(card);
+			p.addIlluminatiToPowerStructure(card);
 		}
 		
 		addLog("Adding initial income to all players...");
@@ -90,9 +127,20 @@ public class Game implements Runnable{
 	}
 
 	public static boolean checkValidGame(ArrayList<Player> players) {
+		
+		for(int i = 0; i < players.size()-1; i++) {
+			for(int j = i+1; j < players.size(); j++) {
+				if(players.get(i).getName().equals(players.get(j).getName())) {
+					return false;
+				}
+			}
+		}
+		
 		if(players.size() >= 2) {
 			return true;
 		}
+		
+		
 		return false;
 	}
 	
@@ -160,7 +208,7 @@ public class Game implements Runnable{
 		readyNextPlayer();
 	}
 	
-	int rollDice() {
+	public int rollDice() {
 		// Simulates the roll of two dice
 		Random random = new Random();
 		int dice1Value = random.nextInt(6) + 1;
@@ -175,14 +223,18 @@ public class Game implements Runnable{
 		frame.pack();
 		bottomSplitPane.setDividerLocation(0.8);
 		rightSplitPane.setDividerLocation(0.78);
-		actionSplitPane.setDividerLocation(0.5);
+		actionSplitPane.setDividerLocation(0.55);
 		gamePanel.setFocusable(true);
 		gamePanel.requestFocusInWindow();
 	}
 	
-	void addLog(String message) {
+	public void addLog(String message) {
 		// Add message
 		gameLogger.append(message + "\n");
+	}
+	
+	public GroupCard getSelectedCard() {
+		return (GroupCard) actionPanel.cardSelectedList.getSelectedItem();
 	}
 	
 	void notifyStartup() {
@@ -207,6 +259,7 @@ public class Game implements Runnable{
 	
 	void readyNextPlayer() {
 		actionPanel.updatePlayer(players.get(playerIndex));
+		globalActionPanel.viewList.setSelectedIndex(playerIndex);
 	}
 	
 	void shufflePlayers() {
@@ -304,11 +357,15 @@ public class Game implements Runnable{
 		deck.add(new Spammers());
 		deck.add(new Tabloids());
 		deck.add(new Texas());
-
-		
-
-
-		
+    deck.add(new TheMafia());
+		deck.add(new TheMenInBlack());
+		deck.add(new TheUnitedNations());
+		deck.add(new TobaccoAndLiquorCompanies());
+		deck.add(new TriliberalCommission());
+		deck.add(new TVPreachers());
+		deck.add(new UndergroundMedia());
+		deck.add(new VideoGames());
+		deck.add(new Vloggers());
 
 		
 		

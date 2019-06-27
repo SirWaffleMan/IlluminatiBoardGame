@@ -17,19 +17,19 @@ public class GameInput implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == game.actionPanel.attackToControlButton) {
-			System.out.println("Attack To Control Button");
+			game.attackToControl();
 		}else if(e.getSource() == game.actionPanel.attackToDestroyButton) {
-			System.out.println("Attack To Destroy Button");
+			game.attackToDestory();
 		}else if(e.getSource() == game.actionPanel.attackToNeutralizeButton) {
-			System.out.println("Attack To Neutralize Button");
+			game.attackToNeutralize();
 		}else if(e.getSource() == game.actionPanel.transferMoneyButton) {
-			System.out.println("Transfer Money Button");
+			game.transferMoney();
 		}else if(e.getSource() == game.actionPanel.moveGroupButton) {
 			System.out.println("Move Group Button");
 		}else if(e.getSource() == game.actionPanel.dropGroupButton) {
 			System.out.println("Drop Group Button");
 		}else if(e.getSource() == game.actionPanel.transferPowerButton) {
-			System.out.println("Transfer Power Button");
+			game.transferPower();
 		}else if(e.getSource() == game.actionPanel.useAbilityButton) {
 			System.out.println("Use Ability Button");
 		}else if(e.getSource() == game.globalActionPanel.endTurnButton) {

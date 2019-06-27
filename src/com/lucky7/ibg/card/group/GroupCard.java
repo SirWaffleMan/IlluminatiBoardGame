@@ -7,12 +7,21 @@ import com.lucky7.ibg.card.Card;
 
 public abstract class GroupCard extends Card{
 	
+	// Card properties
 	protected int power;
 	protected int tPower;
 	protected int resistance;
 	protected int income;
 	protected int balance;
 	protected ArrayList<Alignments> alignments;
+	
+	// Attached cards
+	protected GroupCard topCard;
+	protected GroupCard rightCard;
+	protected GroupCard bottomCard;
+	protected GroupCard leftCard;
+	
+	protected SourceDirection source = SourceDirection.NONE;
 
 	/*
 	 * If card does not have a certain attribute (the card doesn't have a power or resistance
@@ -68,6 +77,43 @@ public abstract class GroupCard extends Card{
 	
 	public ArrayList<Alignments> getAlignments(){
 		return alignments;
+	}
+	
+	public void attachTop(GroupCard card) {
+		topCard = card;
+	}
+	
+	public void attachRight(GroupCard card) {
+		rightCard = card;
+	}
+	
+	public void attachBottom(GroupCard card) {
+		bottomCard = card;
+	}
+	
+	public void attachLeft(GroupCard card) {
+		leftCard = card;
+	}
+	
+	public GroupCard getTopCard() {
+		return topCard;
+	}
+	
+	public GroupCard getRightCard() {
+		return rightCard;
+	}
+	
+	public GroupCard getBottomCard() {
+		return bottomCard;
+	}
+	
+	public GroupCard getLeftCard() {
+		return leftCard;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 
 }
