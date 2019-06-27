@@ -18,7 +18,7 @@ import com.lucky7.ibg.card.group.*;
 import com.lucky7.ibg.card.illuminati.*;
 import com.lucky7.ibg.card.special.*;
 import com.lucky7.ibg.gui.ActionPanel;
-import com.lucky7.ibg.gui.AttackWindow;
+import com.lucky7.ibg.gui.AttackToControlWindow;
 import com.lucky7.ibg.gui.TransferWindow;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.gui.GlobalActionPanel;
@@ -77,15 +77,15 @@ public class Game implements Runnable{
 	}
 	
 	public void attackToControl() {
-		new AttackWindow(this);
+		new AttackToControlWindow(this);
 	}
 	
 	public void attackToNeutralize() {
-		new AttackWindow(this);
+		new AttackToControlWindow(this);
 	}
 	
 	public void attackToDestory() {
-		new AttackWindow(this);
+		new AttackToControlWindow(this);
 	}
 	
 	public void transferMoney() {
