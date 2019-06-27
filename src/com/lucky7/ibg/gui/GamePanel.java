@@ -63,8 +63,10 @@ public class GamePanel extends JPanel{
 		final int h = 56;
 		final int s = 5;
 		
-		g.drawImage(eye, x, y, w, h, this);
 		g.setColor(Color.YELLOW);
+		g.drawImage(eye, x, y, w, h, this);
+		
+		
 		if(card.getTopCard() != null) {
 			g.fillRect(x,y-s,w,s);
 			renderCard(card.getTopCard(), x, y-h-s, g);
@@ -85,5 +87,18 @@ public class GamePanel extends JPanel{
 			renderCard(card.getLeftCard(), x-w-s, y, g);
 		}
 		
+		if(game.actionPanel.cardSelectedList.getSelectedItem().equals(card)) {
+			drawSelectCursor(x,y,g);
+		}
+		
+	}
+	
+	private void drawSelectCursor(int x, int y, Graphics g) {
+		g.setColor(Color.red);
+		g.drawRect(x, y, 56, 56);
+		g.drawRect(x+1, y+1, 54, 54);
+		g.drawRect(x+2, y+2, 52, 52);
+		g.setColor(Color.yellow);
+		repaint();
 	}
 }
