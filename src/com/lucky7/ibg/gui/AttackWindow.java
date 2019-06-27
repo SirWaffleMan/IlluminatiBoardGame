@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 
 import com.lucky7.ibg.Game;
 import com.lucky7.ibg.input.AttackInput;
@@ -29,7 +30,7 @@ public class AttackWindow extends JFrame{
 	AttackInput input;
 	public JComboBox<String> uncontrolledList;
 	public JComboBox<String> placementList;
-	
+	JSlider powerSlider;
 	
 	public AttackWindow(Game g) {
 		this.game = g;
@@ -60,6 +61,18 @@ public class AttackWindow extends JFrame{
 		placementList.addItem("Bottom");
 		placementList.addItem("Left");
 		
+		int min = 0;
+		int max = 15;
+		int init = 0;
+		powerSlider = new JSlider(JSlider.HORIZONTAL,
+                min, max, init);
+		powerSlider.setMajorTickSpacing(5);
+		powerSlider.setMinorTickSpacing(1);
+		powerSlider.setPaintTicks(true);
+		powerSlider.setPaintLabels(true);
+		powerSlider.setBackground(new Color(60,60,60));
+		powerSlider.setForeground(Color.WHITE);
+		
 		//panel.setPreferredSize(new Dimension(400, 300));
 		uncontrolledList.setPreferredSize(new Dimension(100,20));
 		placementList.setPreferredSize(new Dimension(100,20));
@@ -80,11 +93,14 @@ public class AttackWindow extends JFrame{
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		panel.add(placementList, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		panel.add(rollLabel, gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 2;
+		panel.add(powerSlider, gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		panel.add(rollLabel, gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 3;
 		panel.add(enactAttackButton, gbc);
 		setTitle("Attack");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -96,7 +112,7 @@ public class AttackWindow extends JFrame{
 
 	public void enactAttack() {
 		//TODO: Check if it's a card that player owns
-		
+		game.actionPanel.lowerActionCount();
 		dispose();
 	}
 	

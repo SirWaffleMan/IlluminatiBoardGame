@@ -26,6 +26,7 @@ public class TransferWindow extends JFrame{
 	public JButton enactTransferButton;
 	TransferInput input;
 	public JComboBox<String> groupList;
+	JSlider mbSlider;
 	
 	public TransferWindow(Game g) {
 		this.game = g;
@@ -52,7 +53,7 @@ public class TransferWindow extends JFrame{
 		int min = 0;
 		int max = 15;
 		int init = 0;
-		JSlider mbSlider = new JSlider(JSlider.HORIZONTAL,
+		mbSlider = new JSlider(JSlider.HORIZONTAL,
                 min, max, init);
 		mbSlider.setMajorTickSpacing(5);
 		mbSlider.setMinorTickSpacing(1);

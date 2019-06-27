@@ -15,9 +15,12 @@ public class AttackInput implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == attackWindow.uncontrolledList) {
+		if(e.getSource() == attackWindow.uncontrolledList) 
+		{
 			
-		}else if(e.getSource() == attackWindow.enactAttackButton) {
+		}
+		else if(e.getSource() == attackWindow.enactAttackButton) 
+		{
 			attackWindow.enactAttack();
 		}
 	}
