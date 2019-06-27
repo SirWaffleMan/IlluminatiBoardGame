@@ -199,6 +199,7 @@ public class Game implements Runnable{
 	public void endTurn() {
 		addLog(players.get(playerIndex).getName() + " finished his turn.");
 		playerIndex = (playerIndex + 1) % players.size();
+		actionPanel.setActionCount(2);
 		readyNextPlayer();
 	}
 	

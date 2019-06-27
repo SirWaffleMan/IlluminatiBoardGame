@@ -21,20 +21,16 @@ public class TransferPower extends JFrame{
 	JPanel panel;
 	Game game;
 	JLabel transferLabel;
-	JLabel amountLabel;
 	public JButton enactTransferButton;
 	TransferPowerInput input;
 	public JComboBox<String> groupList1;
-	public JComboBox<String> groupList2;
 	
 	public TransferPower(Game g) {
 		this.game = g;
 		setLocationRelativeTo(g.frame);
 		input = new TransferPowerInput(this);
-		transferLabel = new JLabel("Transfer power from?");
+		transferLabel = new JLabel("Transfer power to?");
 		transferLabel.setForeground(Color.WHITE);
-		amountLabel = new JLabel("Transfer power to?");
-		amountLabel.setForeground(Color.WHITE);
 		enactTransferButton = new JButton("Enact Transfer");
 		enactTransferButton.addActionListener(input);
 		
@@ -49,13 +45,6 @@ public class TransferPower extends JFrame{
 		groupList1.addItem("4");
 		groupList1.setPreferredSize(new Dimension(200,20));
 		
-		groupList2 = new JComboBox<String>();
-		groupList2.addItem("1");
-		groupList2.addItem("2");
-		groupList2.addItem("3");
-		groupList2.addItem("4");
-		groupList2.setPreferredSize(new Dimension(200,20));
-		
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.NORTH;
 		gbc.insets = new Insets(6,6,6,6);
@@ -65,14 +54,8 @@ public class TransferPower extends JFrame{
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		panel.add(groupList1, gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		panel.add(amountLabel, gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
-		panel.add(groupList2, gbc);
-		gbc.gridx = 1;
-		gbc.gridy = 2;
 		panel.add(enactTransferButton, gbc);
 		setTitle("Transfer Power");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
