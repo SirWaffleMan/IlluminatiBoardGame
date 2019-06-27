@@ -40,7 +40,7 @@ public class AttackToControlWindow extends JFrame{
 		this.game = g;
 		setLocationRelativeTo(g.frame);
 		input = new AttackToControlInput(this);
-		attackLabel = new JLabel("Which group to attack?");
+		attackLabel = new JLabel("Which group to control?");
 		attackLabel.setForeground(Color.WHITE);
 		placementLabel = new JLabel("Where would you like to place?");
 		placementLabel.setForeground(Color.WHITE);
@@ -106,7 +106,7 @@ public class AttackToControlWindow extends JFrame{
 		gbc.gridx = 1;
 		gbc.gridy = 3;
 		panel.add(enactAttackButton, gbc);
-		setTitle("Attack");
+		setTitle("AttackToControl");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		add(panel);
