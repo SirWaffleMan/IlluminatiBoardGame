@@ -35,6 +35,7 @@ public class ActionPanel extends JPanel{
 	public JButton dropGroupButton;
 	public JButton useAbilityButton;
 	public GameInput input;
+	int count = 2;
 	
 	public ActionPanel(GameInput input) {
 		this.input = input;
@@ -50,6 +51,7 @@ public class ActionPanel extends JPanel{
 		for(int i = 0; i < p.getControlledGroups().size(); i++) {
 			cardSelectedList.addItem(p.getControlledGroups().get(i));
 		}
+		
 		repaint();
 	}
 	
@@ -57,7 +59,7 @@ public class ActionPanel extends JPanel{
 		currentPlayerLabel = new JLabel();
 		currentPlayerLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		currentPlayerLabel.setForeground(new Color(130, 144, 255));
-		actionsRemainingLabel = new JLabel("2");
+		actionsRemainingLabel = new JLabel("" + count);
 		actionsRemainingLabel.setFont(new Font("Arial", Font.BOLD, 20));
 		actionsRemainingLabel.setForeground(new Color(255, 162, 56));
 		cardSelectedLabel = new JLabel("Card selected:");
@@ -168,5 +170,17 @@ public class ActionPanel extends JPanel{
 		
 		cardSelectedLabel.setForeground(Color.WHITE);
 		setOpaque(false);
+	}
+	
+	public void setActionCount(int c)
+	{
+		count = c;
+		actionsRemainingLabel.setText("" + (count));
+	}
+	
+	public void lowerActionCount()
+	{
+		count--;
+		actionsRemainingLabel.setText("" + (count));
 	}
 }
