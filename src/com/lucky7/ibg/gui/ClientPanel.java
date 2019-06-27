@@ -88,7 +88,7 @@ public class ClientPanel extends JPanel{
 		ScrollLabel = new JLabel("  Name: ");
 		status = new JLabel();
 		status.setForeground(Color.RED);
-		status.setText("A minimum of 2 players is required.");
+		status.setText("A minimum of 2 players is required. No duplicate names.");
 		status.setVisible(false);
 		playMenuPanel = new JPanel();
 		
@@ -111,7 +111,7 @@ public class ClientPanel extends JPanel{
 		playMenuPanel.add(startGameButton);
 		playMenuPanel.add(p);
 		playMenuPanel.add(status);
-		playMenuPanel.setPreferredSize(new Dimension(400, 460));
+		playMenuPanel.setPreferredSize(new Dimension(400, 300));
 		
 		// Add listeners
 		playButton.addActionListener(navigator);

@@ -18,7 +18,7 @@ import com.lucky7.ibg.card.group.*;
 import com.lucky7.ibg.card.illuminati.*;
 import com.lucky7.ibg.card.special.*;
 import com.lucky7.ibg.gui.ActionPanel;
-import com.lucky7.ibg.gui.AttackWindow;
+import com.lucky7.ibg.gui.AttackToControlWindow;
 import com.lucky7.ibg.gui.TransferWindow;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.gui.GlobalActionPanel;
@@ -77,15 +77,15 @@ public class Game implements Runnable{
 	}
 	
 	public void attackToControl() {
-		new AttackWindow(this);
+		new AttackToControlWindow(this);
 	}
 	
 	public void attackToNeutralize() {
-		new AttackWindow(this);
+		new AttackToControlWindow(this);
 	}
 	
 	public void attackToDestory() {
-		new AttackWindow(this);
+		new AttackToControlWindow(this);
 	}
 	
 	public void transferMoney() {
@@ -127,9 +127,20 @@ public class Game implements Runnable{
 	}
 
 	public static boolean checkValidGame(ArrayList<Player> players) {
+		
+		for(int i = 0; i < players.size()-1; i++) {
+			for(int j = i+1; j < players.size(); j++) {
+				if(players.get(i).getName().equals(players.get(j).getName())) {
+					return false;
+				}
+			}
+		}
+		
 		if(players.size() >= 2) {
 			return true;
 		}
+		
+		
 		return false;
 	}
 	
@@ -248,6 +259,7 @@ public class Game implements Runnable{
 	
 	void readyNextPlayer() {
 		actionPanel.updatePlayer(players.get(playerIndex));
+		globalActionPanel.viewList.setSelectedIndex(playerIndex);
 	}
 	
 	void shufflePlayers() {
@@ -335,10 +347,6 @@ public class Game implements Runnable{
 		deck.add(new IRS());
 		deck.add(new IRS());
 		deck.add(new IRS());
-
-		
-
-
 		deck.add(new TheMafia());
 		deck.add(new TheMenInBlack());
 		deck.add(new TheUnitedNations());

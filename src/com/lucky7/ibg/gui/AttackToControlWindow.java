@@ -15,12 +15,12 @@ import javax.swing.JPanel;
 import com.lucky7.ibg.Game;
 import com.lucky7.ibg.card.group.GroupCard;
 import com.lucky7.ibg.card.group.SourceDirection;
-import com.lucky7.ibg.input.AttackInput;
+import com.lucky7.ibg.input.AttackToControlInput;
 import com.lucky7.ibg.player.Player;
 import com.lucky7.ibg.player.PowerStructure;
 
 
-public class AttackWindow extends JFrame{
+public class AttackToControlWindow extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -30,15 +30,15 @@ public class AttackWindow extends JFrame{
 	JLabel placementLabel;
 	JLabel rollLabel;
 	public JButton enactAttackButton;
-	AttackInput input;
+	AttackToControlInput input;
 	public JComboBox<GroupCard> uncontrolledList;
 	public JComboBox<String> placementList;
 	
 	
-	public AttackWindow(Game g) {
+	public AttackToControlWindow(Game g) {
 		this.game = g;
 		setLocationRelativeTo(g.frame);
-		input = new AttackInput(this);
+		input = new AttackToControlInput(this);
 		attackLabel = new JLabel("Which group to attack?");
 		attackLabel.setForeground(Color.WHITE);
 		placementLabel = new JLabel("Where would you like to place?");
@@ -64,9 +64,8 @@ public class AttackWindow extends JFrame{
 		placementList.addItem("Bottom");
 		placementList.addItem("Left");
 		
-		//panel.setPreferredSize(new Dimension(400, 300));
-		uncontrolledList.setPreferredSize(new Dimension(100,20));
-		placementList.setPreferredSize(new Dimension(100,20));
+		uncontrolledList.setPreferredSize(new Dimension(200,20));
+		placementList.setPreferredSize(new Dimension(200,20));
 		
 		
 		GridBagConstraints gbc = new GridBagConstraints();

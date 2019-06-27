@@ -3,13 +3,13 @@ package com.lucky7.ibg.input;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.lucky7.ibg.gui.AttackWindow;
+import com.lucky7.ibg.gui.AttackToControlWindow;
 
-public class AttackInput implements ActionListener{
+public class AttackToControlInput implements ActionListener{
 	
-	AttackWindow attackWindow;
+	AttackToControlWindow attackWindow;
 	
-	public AttackInput(AttackWindow w) {
+	public AttackToControlInput(AttackToControlWindow w) {
 		this.attackWindow = w;
 	}
 
