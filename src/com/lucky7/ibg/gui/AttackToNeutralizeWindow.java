@@ -66,7 +66,7 @@ public class AttackToNeutralizeWindow extends JFrame{
 		int init = 1;
 		if(max != 0) {
 			powerSlider = new JSlider(JSlider.HORIZONTAL,min, max, init);
-			powerSlider.setMajorTickSpacing(5);
+			powerSlider.setMajorTickSpacing(max-1);
 			powerSlider.setMinorTickSpacing(1);
 			powerSlider.setPaintTicks(true);
 			powerSlider.setPaintLabels(true);

@@ -20,7 +20,6 @@ import com.lucky7.ibg.card.group.GroupCard;
 import com.lucky7.ibg.card.group.SourceDirection;
 import com.lucky7.ibg.input.AttackToControlInput;
 import com.lucky7.ibg.player.Player;
-import com.lucky7.ibg.player.PowerStructure;
 
 
 public class AttackToControlWindow extends JFrame{
