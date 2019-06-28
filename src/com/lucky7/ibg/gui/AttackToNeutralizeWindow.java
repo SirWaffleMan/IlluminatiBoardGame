@@ -133,11 +133,12 @@ public class AttackToNeutralizeWindow extends JFrame{
 		if(roll <= target + moneySpent && roll < 11) {
 			game.addLog("Attack was successful!");
 			
-			// Remove card from player and add into uncontrolled
+			// Remove card from player and balance and add into uncontrolled
 			for(int i = 0; i < game.players.size(); i++) {
 				for(int j = 0; j < game.players.get(i).getControlledGroups().size(); j++) {
 					if(attackedCard == game.players.get(i).getControlledGroups().get(j)) {
 						GroupCard card = game.players.get(i).removeCard(attackedCard);
+						card.removeBalance(card.getBalance());
 						game.uncontrolled.add(card);
 					}
 				}
