@@ -36,7 +36,6 @@ public class ClientPanel extends JPanel{
 	public JPanel playMenuPanel;
 	public JPanel Panel;
 	public PlayerTextField[] playerField;
-	//public JTextArea instructions;
 	public JLabel status;
 	public JLabel ScrollLabel;
 	
@@ -72,14 +71,6 @@ public class ClientPanel extends JPanel{
 		exitButton = new JButton("EXIT");
 		backButton = new JButton("Back");
 		startGameButton = new JButton("Start Game");
-		//instructions = new JTextArea();
-		//instructions.setText("Instructions:\n"
-							//+ "Please enter name of the player and check box if the player is a CPU.\n"
-							//+"Leave the fields blank if you don't want anymore players.\n"
-							//+"Press \"Start Game\" when you are ready to play the game.");
-		//instructions.setPreferredSize(new Dimension(380, 130));
-		//instructions.setEditable(false);
-		//instructions.setLineWrap(true);
 		ScrollLabel = new JLabel("  Name: ");
 		status = new JLabel();
 		status.setForeground(Color.RED);
