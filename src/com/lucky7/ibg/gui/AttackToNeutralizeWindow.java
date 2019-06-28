@@ -31,7 +31,7 @@ public class AttackToNeutralizeWindow extends JFrame{
 	JLabel rollLabel;
 	public JButton enactAttackButton;
 	AttackToNeutralizeInput input;
-	public JComboBox<GroupCard> uncontrolledList;
+	public JComboBox<GroupCard> controlledList;
 	public JComboBox<String> placementList;
 	JSlider powerSlider;
 	int target = 0;
@@ -54,11 +54,10 @@ public class AttackToNeutralizeWindow extends JFrame{
 		panel = new JPanel();
 		panel.setBackground(new Color(60,60,60));
 		panel.setLayout(new GridBagLayout());
-		uncontrolledList = new JComboBox<GroupCard>();
+		controlledList = new JComboBox<GroupCard>();
 		
-		// TODO: Add other player's cards
 		for(int i = 0; i < game.getControlledGroups().size() - game.players.size(); i++) {
-			uncontrolledList.addItem(game.getControlledGroups(i));
+			controlledList.addItem(game.getControlledGroups(i));
 		}
 				
 		int min = 1;
@@ -81,7 +80,7 @@ public class AttackToNeutralizeWindow extends JFrame{
 		}
 
 		
-		uncontrolledList.setPreferredSize(new Dimension(200,20));		
+		controlledList.setPreferredSize(new Dimension(200,20));		
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.NORTH;
@@ -91,7 +90,7 @@ public class AttackToNeutralizeWindow extends JFrame{
 		panel.add(attackLabel, gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		panel.add(uncontrolledList, gbc);
+		panel.add(controlledList, gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		panel.add(powerSlider, gbc);
@@ -108,12 +107,12 @@ public class AttackToNeutralizeWindow extends JFrame{
 		pack();
 		
 		card = game.getSelectedCard();
-		attackedCard = (GroupCard) uncontrolledList.getSelectedItem();
+		attackedCard = (GroupCard) controlledList.getSelectedItem();
 		updateRollLabel();
 	}
 	
 	public void updateRollLabel() {
-		attackedCard = (GroupCard) uncontrolledList.getSelectedItem();
+		attackedCard = (GroupCard) controlledList.getSelectedItem();
 		// TODO: Fix this bodge
 		try {
 			target = card.getPower() - attackedCard.getResistance();

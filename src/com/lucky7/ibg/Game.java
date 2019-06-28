@@ -50,7 +50,7 @@ public class Game implements Runnable{
 	ArrayList<IlluminatiCard> illuminatiCards;
 	ArrayList<Card> deck;
 	public ArrayList<GroupCard> uncontrolled;
-	ArrayList<Card> discardPile;
+	public ArrayList<Card> discardPile;
 	
 	@Override
 	public void run() {

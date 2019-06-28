@@ -16,7 +16,7 @@ public class AttackToNeutralizeInput implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource() == attackWindow.uncontrolledList) {
+		if(e.getSource() == attackWindow.controlledList) {
 			
 		}else if(e.getSource() == attackWindow.enactAttackButton) {
 			attackWindow.enactAttack();
