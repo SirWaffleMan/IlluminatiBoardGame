@@ -65,17 +65,21 @@ public class AttackToControlWindow extends JFrame{
 		placementList.addItem("Bottom");
 		placementList.addItem("Left");
 		
-		int min = 0;
-		int max = 15;
-		int init = 0;
-		powerSlider = new JSlider(JSlider.HORIZONTAL,
-                min, max, init);
-		powerSlider.setMajorTickSpacing(5);
-		powerSlider.setMinorTickSpacing(1);
-		powerSlider.setPaintTicks(true);
-		powerSlider.setPaintLabels(true);
-		powerSlider.setBackground(new Color(60,60,60));
-		powerSlider.setForeground(Color.WHITE);
+		int min = 1;
+		int max = game.getSelectedCard().getBalance();
+		int init = 1;
+		
+		if(max != 0) {
+			powerSlider = new JSlider(JSlider.HORIZONTAL,
+	                min, max, init);
+			powerSlider.setMajorTickSpacing(2);
+			powerSlider.setMinorTickSpacing(1);
+			powerSlider.setPaintTicks(true);
+			powerSlider.setPaintLabels(true);
+			powerSlider.setBackground(new Color(60,60,60));
+			powerSlider.setForeground(Color.WHITE);
+		}
+		
 
 		
 		uncontrolledList.setPreferredSize(new Dimension(200,20));
@@ -99,7 +103,8 @@ public class AttackToControlWindow extends JFrame{
 		panel.add(placementList, gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 2;
-		panel.add(powerSlider, gbc);
+		if(max != 0)
+			panel.add(powerSlider, gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		panel.add(rollLabel, gbc);

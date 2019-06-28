@@ -78,6 +78,10 @@ public abstract class GroupCard extends Card{
 		this.balance += income;
 	}
 	
+	public int getBalance() {
+		return this.balance;
+	}
+	
 	public ArrayList<Alignments> getAlignments(){
 		return alignments;
 	}

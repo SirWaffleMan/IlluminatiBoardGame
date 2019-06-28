@@ -296,6 +296,8 @@ public class Game implements Runnable{
 		actionPanel.updatePlayer(players.get(playerIndex));
 		globalActionPanel.viewList.setSelectedIndex(playerIndex);
 		drawCard();
+		addLog(players.get(playerIndex).getName() + " adding income...");
+		players.get(playerIndex).addIncome();
 	}
 	
 	void shufflePlayers() {
