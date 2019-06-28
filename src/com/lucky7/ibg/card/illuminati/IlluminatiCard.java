@@ -10,6 +10,11 @@ public abstract class IlluminatiCard extends GroupCard {
 		this.tPower = tPower;
 		this.income = income;
 		this.balance = 0;
+		
+		this.hasLeftArrow = true;
+		this.hasRightArrow = true;
+		this.hasBottomArrow = true;
+		this.hasTopArrow = true;
 	}
 	
 	public void addIncome() {
