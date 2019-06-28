@@ -121,7 +121,7 @@ public class AttackToDestroyWindow extends JFrame{
 		attackedCard = (GroupCard) uncontrolledList.getSelectedItem();
 		// TODO: Fix this bodge
 		try {
-			target = card.getPower() - attackedCard.getResistance();
+			target = card.getPower() - attackedCard.getPower();
 			moneySpent = (powerSlider != null) ? powerSlider.getValue() : 0;
 			
 			rollLabel.setText("Roll: " + (target + moneySpent) + " or less");
@@ -135,7 +135,6 @@ public class AttackToDestroyWindow extends JFrame{
 		Player player = game.getCurrentPlayer();
 		
 		int roll = game.rollDice();
-		int target = 10;
 		
 		if(roll <= target && roll < 11) {
 			game.addLog("Attack was successful! \"" + attackedCard.getName() + "\" was destroyed!");
