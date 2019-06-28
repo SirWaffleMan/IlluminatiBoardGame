@@ -16,14 +16,15 @@ public abstract class GroupCard extends Card{
 	protected ArrayList<Alignments> alignments;
 	
 	/*
-	 * These refer to whether a card has arrows point outwards indicating that a
+	 * These refer to whether a card has arrows pointed outwards indicating that a
 	 * group can be controlled on that side. Illuminati cards have every arrow available
-	 * while group cards may have all but the left arrow.
+	 * while group cards may have all but the left arrow. For regular group cards the
+	 * there is no left arrrow since that is the one it is controlled by.
 	 */
-	protected boolean hasLeftArrow;
-	protected boolean hasTopArrow;
-	protected boolean hasRightArrow;
-	protected boolean hasBottomArrow;
+	protected boolean hasLeftArrow = false;
+	protected boolean hasTopArrow = false;
+	protected boolean hasRightArrow = false;
+	protected boolean hasBottomArrow = false;
 	
 	// Attached cards
 	protected GroupCard topCard;
