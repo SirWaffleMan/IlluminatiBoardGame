@@ -123,4 +123,8 @@ public abstract class GroupCard extends Card{
 		return name;
 	}
 
+	public void removeBalance(int moneySpent) {
+		balance -= moneySpent;
+	}
+
 }

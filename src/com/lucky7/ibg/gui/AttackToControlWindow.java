@@ -170,6 +170,7 @@ public class AttackToControlWindow extends JFrame{
 		
 		
 		int roll = game.rollDice();
+		card.removeBalance(moneySpent);
 		
 		if(roll <= target + moneySpent && roll < 11) {
 			game.addLog("Attack was successful!");
