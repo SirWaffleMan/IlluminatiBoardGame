@@ -8,6 +8,7 @@ public class InternetPrOn extends GroupCard{
 		super("Internet PrOn", 2, -1, 2, 3);
 		addAlignment(Alignments.Liberal);
 		addAlignment(Alignments.Media);
+		
+		hasTopArrow = true;
 	}
-	
 }

@@ -8,6 +8,7 @@ public class AntiNuclearActivists extends GroupCard{
 		super("Anti-Nuclear Activists", 2, -1, 5, 1);
 		
 		addAlignment(Alignments.Liberal);
+		
+		hasTopArrow = true;
 	}
-
 }

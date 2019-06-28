@@ -9,6 +9,8 @@ public class MoralMinority extends GroupCard{
 		addAlignment(Alignments.Conservative);
 		addAlignment(Alignments.Straight);
 		addAlignment(Alignments.Fanatic);
+		
+		hasTopArrow = true;
 	}
-	}
+}
 	
