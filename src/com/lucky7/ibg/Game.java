@@ -21,7 +21,7 @@ import com.lucky7.ibg.gui.ActionPanel;
 import com.lucky7.ibg.gui.AttackToControlWindow;
 import com.lucky7.ibg.gui.AttackToDestroyWindow;
 import com.lucky7.ibg.gui.AttackToNeutralizeWindow;
-import com.lucky7.ibg.gui.TransferWindow;
+import com.lucky7.ibg.gui.TransferMBWindow;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.gui.GlobalActionPanel;
 import com.lucky7.ibg.gui.TransferPower;
@@ -132,7 +132,7 @@ public class Game implements Runnable{
 	}
 	
 	public void transferMoney() {
-		new TransferWindow(this);
+		new TransferMBWindow(this);
 	}
 
 	public void transferPower() {

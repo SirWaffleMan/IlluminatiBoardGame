@@ -36,6 +36,7 @@ public class AttackToNeutralizeWindow extends JFrame{
 	JSlider powerSlider;
 	int target = 0;
 	int moneySpent = 0;
+	int bonus = 6;
 	
 	GroupCard card;
 	GroupCard attackedCard;
@@ -118,7 +119,7 @@ public class AttackToNeutralizeWindow extends JFrame{
 			target = card.getPower() - attackedCard.getResistance();
 			moneySpent = (powerSlider != null) ? powerSlider.getValue() : 0;
 			
-			rollLabel.setText("Roll: " + (target + moneySpent) + " or less");
+			rollLabel.setText("Roll: " + (target + moneySpent + bonus) + " or less");
 		}catch(NullPointerException e) {
 			
 		}
@@ -130,7 +131,7 @@ public class AttackToNeutralizeWindow extends JFrame{
 		
 		int roll = game.rollDice();
 		
-		if(roll <= target + moneySpent && roll < 11) {
+		if(roll <= target + moneySpent + bonus && roll < 11) {
 			game.addLog("Attack was successful!");
 			
 			// Remove card from player and balance and add into uncontrolled

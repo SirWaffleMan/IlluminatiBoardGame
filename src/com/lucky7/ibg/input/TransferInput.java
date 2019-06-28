@@ -3,13 +3,13 @@ package com.lucky7.ibg.input;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.lucky7.ibg.gui.TransferWindow;
+import com.lucky7.ibg.gui.TransferMBWindow;
 
 public class TransferInput implements ActionListener{
 	
-	TransferWindow transferWindow;
+	TransferMBWindow transferWindow;
 	
-	public TransferInput(TransferWindow w) {
+	public TransferInput(TransferMBWindow w) {
 		this.transferWindow = w;
 	}
 

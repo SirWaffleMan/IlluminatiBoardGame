@@ -16,7 +16,7 @@ import javax.swing.JSlider;
 import com.lucky7.ibg.Game;
 import com.lucky7.ibg.input.TransferInput;
 
-public class TransferWindow extends JFrame{
+public class TransferMBWindow extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	JPanel panel;
@@ -27,7 +27,7 @@ public class TransferWindow extends JFrame{
 	TransferInput input;
 	public JComboBox<String> groupList;
 	
-	public TransferWindow(Game g) {
+	public TransferMBWindow(Game g) {
 		this.game = g;
 		setLocationRelativeTo(g.frame);
 		input = new TransferInput(this);
