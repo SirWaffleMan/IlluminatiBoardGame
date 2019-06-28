@@ -15,7 +15,6 @@ import javax.swing.JSlider;
 
 import com.lucky7.ibg.Game;
 import com.lucky7.ibg.card.group.GroupCard;
-import com.lucky7.ibg.input.AttackToDestroyInput;
 import com.lucky7.ibg.input.AttackToNeutralizeInput;
 import com.lucky7.ibg.player.Player;
 import com.lucky7.ibg.player.PowerStructure;
