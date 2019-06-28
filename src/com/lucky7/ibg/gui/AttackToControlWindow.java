@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import com.lucky7.ibg.Game;
 import com.lucky7.ibg.card.group.GroupCard;
@@ -34,7 +36,11 @@ public class AttackToControlWindow extends JFrame{
 	AttackToControlInput input;
 	public JComboBox<GroupCard> uncontrolledList;
 	public JComboBox<String> placementList;
-	JSlider powerSlider;
+	public JSlider powerSlider;
+	int target = 0;
+	
+	GroupCard card;
+	GroupCard attackedCard;
 	
 	public AttackToControlWindow(Game g) {
 		this.game = g;
@@ -44,7 +50,7 @@ public class AttackToControlWindow extends JFrame{
 		attackLabel.setForeground(Color.WHITE);
 		placementLabel = new JLabel("Where would you like to place?");
 		placementLabel.setForeground(Color.WHITE);
-		rollLabel = new JLabel("Roll: 10 or less");
+		rollLabel = new JLabel("Roll:");
 		rollLabel.setForeground(Color.RED);
 		
 		enactAttackButton = new JButton("Enact Attack");
@@ -78,6 +84,12 @@ public class AttackToControlWindow extends JFrame{
 			powerSlider.setPaintLabels(true);
 			powerSlider.setBackground(new Color(60,60,60));
 			powerSlider.setForeground(Color.WHITE);
+			powerSlider.addChangeListener(new ChangeListener() {
+		        @Override
+		        public void stateChanged(ChangeEvent ce) {
+		            updateRollLabel();
+		        }
+		    });
 		}
 		
 
@@ -116,6 +128,17 @@ public class AttackToControlWindow extends JFrame{
 		setVisible(true);
 		add(panel);
 		pack();
+		
+		card = game.getSelectedCard();
+		attackedCard = (GroupCard) uncontrolledList.getSelectedItem();
+		updateRollLabel();
+	}
+	
+	void updateRollLabel() {
+		target = card.getPower() - attackedCard.getResistance();
+		int moneySpent = (powerSlider != null) ? powerSlider.getValue() : 0;
+		
+		rollLabel.setText("Roll: " + (target + moneySpent) + " or less");
 	}
 
 
@@ -123,8 +146,7 @@ public class AttackToControlWindow extends JFrame{
 		
 		Player player = game.getCurrentPlayer();
 		PowerStructure ps = player.getPowerStructure();
-		GroupCard card = game.getSelectedCard();
-		GroupCard attackedCard = (GroupCard) uncontrolledList.getSelectedItem();
+		
 		String placement = (String) placementList.getSelectedItem();
 		
 		SourceDirection direction = SourceDirection.NONE;
@@ -145,7 +167,6 @@ public class AttackToControlWindow extends JFrame{
 		
 		
 		int roll = game.rollDice();
-		int target = 10;
 		
 		if(roll <= target && roll < 11) {
 			game.addLog("Attack was successful!");

@@ -19,6 +19,8 @@ public class AttackToControlInput implements ActionListener{
 			
 		}else if(e.getSource() == attackWindow.enactAttackButton) {
 			attackWindow.enactAttack();
+		}else if(e.getSource() == attackWindow.powerSlider) {
+			
 		}
 	}
 }
