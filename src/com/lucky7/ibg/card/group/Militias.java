@@ -8,6 +8,7 @@ public class Militias extends GroupCard{
 		super("Militias", 2, -1, 4, 2);
 		addAlignment(Alignments.Conservative);
 		addAlignment(Alignments.Violent);
+		
+		hasRightArrow = true;
 	}
-	}
-	
+}

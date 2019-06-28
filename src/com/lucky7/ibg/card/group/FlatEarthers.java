@@ -8,6 +8,8 @@ public class FlatEarthers extends GroupCard{
 		super("Flat Earthers", 1, -1, 2, 1);
 		addAlignment(Alignments.Weird);
 		addAlignment(Alignments.Conservative);
+		
+		hasRightArrow = true;
 	}
 	
 }
