@@ -152,6 +152,7 @@ public class AttackToControlWindow extends JFrame{
 		
 		game.actionPanel.lowerActionCount();
 		game.actionPanel.updatePlayer(player);
+		game.populateAvailableActions();
 		game.gamePanel.repaint();
 		
 		dispose();

@@ -35,12 +35,16 @@ public class ActionPanel extends JPanel{
 	public JButton dropGroupButton;
 	public JButton useAbilityButton;
 	public GameInput input;
-	int count = 2;
+	int availableTurns = 2;
 	
 	public ActionPanel(GameInput input) {
 		this.input = input;
 		init();
 		configure();
+	}
+	
+	public int getAvailableTurns() {
+		return availableTurns;
 	}
 	
 	public void updatePlayer(Player p) 
@@ -59,7 +63,7 @@ public class ActionPanel extends JPanel{
 		currentPlayerLabel = new JLabel();
 		currentPlayerLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		currentPlayerLabel.setForeground(new Color(130, 144, 255));
-		actionsRemainingLabel = new JLabel("" + count);
+		actionsRemainingLabel = new JLabel("" + availableTurns);
 		actionsRemainingLabel.setFont(new Font("Arial", Font.BOLD, 20));
 		actionsRemainingLabel.setForeground(new Color(255, 162, 56));
 		cardSelectedLabel = new JLabel("Card selected:");
@@ -174,13 +178,15 @@ public class ActionPanel extends JPanel{
 	
 	public void setActionCount(int c)
 	{
-		count = c;
-		actionsRemainingLabel.setText("" + (count));
+		availableTurns = c;
+		actionsRemainingLabel.setText("" + (availableTurns));
 	}
 	
 	public void lowerActionCount()
 	{
-		count--;
-		actionsRemainingLabel.setText("" + (count));
+		if(availableTurns > 0) {
+			availableTurns--;
+			actionsRemainingLabel.setText("" + (availableTurns));
+		}
 	}
 }

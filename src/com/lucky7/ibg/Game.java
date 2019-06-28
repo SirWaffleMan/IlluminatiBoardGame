@@ -83,6 +83,24 @@ public class Game implements Runnable{
 		new AttackToControlWindow(this);
 	}
 	
+	public void populateAvailableActions() {
+		if(actionPanel.getAvailableTurns() < 1) {
+			actionPanel.attackToControlButton.setVisible(false);
+			actionPanel.attackToDestroyButton.setVisible(false);
+			actionPanel.attackToNeutralizeButton.setVisible(false);
+			actionPanel.moveGroupButton.setVisible(false);
+			actionPanel.transferPowerButton.setVisible(false);
+			actionPanel.transferMoneyButton.setVisible(false);
+		}else {
+			actionPanel.attackToControlButton.setVisible(true);
+			actionPanel.attackToDestroyButton.setVisible(true);
+			actionPanel.attackToNeutralizeButton.setVisible(true);
+			actionPanel.moveGroupButton.setVisible(true);
+			actionPanel.transferPowerButton.setVisible(true);
+			actionPanel.transferMoneyButton.setVisible(true);
+		}
+	}
+	
 	public void attackToNeutralize() {
 		new AttackToNeutralizeWindow(this);
 	}
@@ -274,6 +292,7 @@ public class Game implements Runnable{
 	}
 	
 	void readyNextPlayer() {
+		populateAvailableActions();
 		actionPanel.updatePlayer(players.get(playerIndex));
 		globalActionPanel.viewList.setSelectedIndex(playerIndex);
 		drawCard();
