@@ -7,6 +7,9 @@ public class TheMafia extends GroupCard{
 		super("The Mafia", 7, -1, 7, 6);
 		addAlignment(Alignments.Violent); 
 		addAlignment(Alignments.Criminal); 
-
+		
+		hasTopArrow = true;
+		hasRightArrow = true;
+		hasBottomArrow = true;
 	}
 }
