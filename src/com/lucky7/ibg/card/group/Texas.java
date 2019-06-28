@@ -8,6 +8,9 @@ public class Texas extends GroupCard{
 		super("Tabloids", 6, -1, 6, 4);
 		addAlignment(Alignments.Violent);
 		addAlignment(Alignments.Conservative);
+		
+		hasTopArrow = true;
+		hasRightArrow = true;
 	}
 	}
 	

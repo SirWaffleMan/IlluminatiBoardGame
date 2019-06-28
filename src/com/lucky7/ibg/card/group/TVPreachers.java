@@ -8,5 +8,8 @@ public class TVPreachers extends GroupCard{
 		addAlignment(Alignments.Straight); 
 		addAlignment(Alignments.Fanatic); 
 		addAlignment(Alignments.Media); 
+		
+		hasTopArrow = true;
+		hasRightArrow = true;
 	}
 }
