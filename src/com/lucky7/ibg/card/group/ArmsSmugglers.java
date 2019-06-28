@@ -9,6 +9,9 @@ public class ArmsSmugglers extends GroupCard{
 		
 		addAlignment(Alignments.Violent);
 		addAlignment(Alignments.Criminal);
+		
+		hasRightArrow = true;
+		hasBottomArrow = true;
 	}
 
 }
