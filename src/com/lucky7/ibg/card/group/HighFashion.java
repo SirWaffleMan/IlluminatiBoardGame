@@ -8,6 +8,8 @@ public class HighFashion extends GroupCard{
 		super("HighFashion", 1, -1, 1, 4);
 		addAlignment(Alignments.Peaceful);
 		addAlignment(Alignments.Weird);
+		
+		hasBottomArrow = true;
 	}
 	
 }

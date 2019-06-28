@@ -8,5 +8,6 @@ public class TheUnitedNations extends GroupCard{
 		addAlignment(Alignments.Liberal); 
 		addAlignment(Alignments.Peaceful); 
 
+		hasBottomArrow = true;
 	}
 }

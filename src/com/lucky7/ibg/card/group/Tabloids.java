@@ -8,6 +8,8 @@ public class Tabloids extends GroupCard{
 		super("Tabloids", 2, -1, 3, 3);
 		addAlignment(Alignments.Weird);
 		addAlignment(Alignments.Media);
+		
+		hasBottomArrow = true;
 	}
-	}
+}
 	
