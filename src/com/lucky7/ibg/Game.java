@@ -66,6 +66,7 @@ public class Game implements Runnable{
 		
 		// Main game process
 		populateMinimumUncontrolled();
+		drawCard();
 		
 	}
 	
@@ -249,6 +250,17 @@ public class Game implements Runnable{
 		}
 	}
 	
+	void drawCard() {
+		Card card = deck.remove(0);
+		if(card instanceof GroupCard) {
+			addLog(players.get(playerIndex).getName() + " drew \"" + card.getName() + "\" to uncontrolled groups.");
+			uncontrolled.add((GroupCard)card);
+		}else {
+			addLog(players.get(playerIndex).getName() + " drew special card");
+			players.get(playerIndex).getPowerStructure().addSpecialCard((SpecialCard)card);
+		}
+	}
+	
 	void populateMinimumUncontrolled() {
 		while(uncontrolled.size() < 4) {
 			Card card = deck.remove(0);
@@ -264,6 +276,7 @@ public class Game implements Runnable{
 	void readyNextPlayer() {
 		actionPanel.updatePlayer(players.get(playerIndex));
 		globalActionPanel.viewList.setSelectedIndex(playerIndex);
+		drawCard();
 	}
 	
 	void shufflePlayers() {
