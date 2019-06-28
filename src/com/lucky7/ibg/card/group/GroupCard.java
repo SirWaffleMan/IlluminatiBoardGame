@@ -14,6 +14,9 @@ public abstract class GroupCard extends Card{
 	protected int income;
 	protected int balance;
 	protected ArrayList<Alignments> alignments;
+	protected boolean hasTopArrow;
+	protected boolean hasRightArrow;
+	protected boolean hasBottomArrow;
 	
 	// Attached cards
 	protected GroupCard topCard;
@@ -22,7 +25,7 @@ public abstract class GroupCard extends Card{
 	protected GroupCard leftCard;
 	
 	protected SourceDirection source = SourceDirection.LEFT;
-
+	
 	/*
 	 * If card does not have a certain attribute (the card doesn't have a power or resistance
 	 * for example) enter a -1 for that value. Note: there is a difference between a card not
