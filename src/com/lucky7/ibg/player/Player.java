@@ -28,6 +28,26 @@ public class Player {
 		return name;
 	}
 	
+	public GroupCard removeCard(GroupCard card) {
+		for(int i = 0; i < powerStructure.controlledGroups.size(); i++) {
+			if(card == powerStructure.controlledGroups.get(i)) {
+				for(int j = 0; j < powerStructure.controlledGroups.size(); j++) {
+					if(getControlledGroups().get(j).getTopCard() == card) {
+						getControlledGroups().get(j).attachTop(null);
+					}else if(getControlledGroups().get(j).getBottomCard() == card) {
+						getControlledGroups().get(j).attachBottom(null);
+					}else if(getControlledGroups().get(j).getRightCard() == card) {
+						getControlledGroups().get(j).attachRight(null);
+					}else if(getControlledGroups().get(j).getLeftCard() == card) {
+						getControlledGroups().get(j).attachLeft(null);
+					}
+				}
+			}
+		}
+		getControlledGroups().remove(card);
+		return card;
+	}
+	
 	public void addIncome() {
 		for(GroupCard card : powerStructure.getControlledGroups()) {
 			card.addIncome();

@@ -1,10 +1,7 @@
 package com.lucky7.ibg.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -15,11 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 import com.lucky7.ibg.Game;
 import com.lucky7.ibg.input.ScreenNavigator;
@@ -41,7 +36,6 @@ public class ClientPanel extends JPanel{
 	public JPanel playMenuPanel;
 	public JPanel Panel;
 	public PlayerTextField[] playerField;
-	//public JTextArea instructions;
 	public JLabel status;
 	public JLabel ScrollLabel;
 	
@@ -77,14 +71,6 @@ public class ClientPanel extends JPanel{
 		exitButton = new JButton("EXIT");
 		backButton = new JButton("Back");
 		startGameButton = new JButton("Start Game");
-		//instructions = new JTextArea();
-		//instructions.setText("Instructions:\n"
-							//+ "Please enter name of the player and check box if the player is a CPU.\n"
-							//+"Leave the fields blank if you don't want anymore players.\n"
-							//+"Press \"Start Game\" when you are ready to play the game.");
-		//instructions.setPreferredSize(new Dimension(380, 130));
-		//instructions.setEditable(false);
-		//instructions.setLineWrap(true);
 		ScrollLabel = new JLabel("  Name: ");
 		status = new JLabel();
 		status.setForeground(Color.RED);

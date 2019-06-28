@@ -19,7 +19,9 @@ import com.lucky7.ibg.card.illuminati.*;
 import com.lucky7.ibg.card.special.*;
 import com.lucky7.ibg.gui.ActionPanel;
 import com.lucky7.ibg.gui.AttackToControlWindow;
-import com.lucky7.ibg.gui.TransferWindow;
+import com.lucky7.ibg.gui.AttackToDestroyWindow;
+import com.lucky7.ibg.gui.AttackToNeutralizeWindow;
+import com.lucky7.ibg.gui.TransferMBWindow;
 import com.lucky7.ibg.gui.GamePanel;
 import com.lucky7.ibg.gui.GlobalActionPanel;
 import com.lucky7.ibg.gui.TransferPower;
@@ -43,12 +45,12 @@ public class Game implements Runnable{
 	JTextArea gameLogger;
 	GameInput input;
 	
-	ArrayList<Player> players;
+	public ArrayList<Player> players;
 	int playerIndex = 0;
 	ArrayList<IlluminatiCard> illuminatiCards;
 	ArrayList<Card> deck;
 	public ArrayList<GroupCard> uncontrolled;
-	ArrayList<Card> discardPile;
+	public ArrayList<Card> discardPile;
 	
 	@Override
 	public void run() {
@@ -64,6 +66,7 @@ public class Game implements Runnable{
 		
 		// Main game process
 		populateMinimumUncontrolled();
+		drawCard();
 		
 	}
 	
@@ -80,16 +83,56 @@ public class Game implements Runnable{
 		new AttackToControlWindow(this);
 	}
 	
+	public void populateAvailableActions() {
+		if(actionPanel.getAvailableTurns() < 1) {
+			actionPanel.attackToControlButton.setVisible(false);
+			actionPanel.attackToDestroyButton.setVisible(false);
+			actionPanel.attackToNeutralizeButton.setVisible(false);
+			actionPanel.moveGroupButton.setVisible(false);
+			actionPanel.transferPowerButton.setVisible(false);
+			actionPanel.transferMoneyButton.setVisible(false);
+		}else {
+			actionPanel.attackToControlButton.setVisible(true);
+			actionPanel.attackToDestroyButton.setVisible(true);
+			actionPanel.attackToNeutralizeButton.setVisible(true);
+			actionPanel.moveGroupButton.setVisible(true);
+			actionPanel.transferPowerButton.setVisible(true);
+			actionPanel.transferMoneyButton.setVisible(true);
+		}
+	}
+	
+	public ArrayList<GroupCard> getControlledGroups() {
+		ArrayList<GroupCard> controlled = new ArrayList<GroupCard>();
+		
+		for(int i = 0; i < players.size(); i++) {
+			controlled.addAll(players.get(i).getControlledGroups());
+		}
+		return controlled;
+	}
+	
+	public GroupCard getControlledGroups(int index) {
+		ArrayList<GroupCard> controlled = getControlledGroups();
+		
+		for(int i = 0; i < controlled.size(); i++) {
+			Card card = controlled.get(i);
+			if(card instanceof IlluminatiCard) {
+				controlled.remove(i);
+			}
+		}
+		
+		return controlled.get(index);
+	}
+	
 	public void attackToNeutralize() {
-		new AttackToControlWindow(this);
+		new AttackToNeutralizeWindow(this);
 	}
 	
 	public void attackToDestory() {
-		new AttackToControlWindow(this);
+		new AttackToDestroyWindow(this);
 	}
 	
 	public void transferMoney() {
-		new TransferWindow(this);
+		new TransferMBWindow(this);
 	}
 
 	public void transferPower() {
@@ -200,6 +243,7 @@ public class Game implements Runnable{
 		addLog(players.get(playerIndex).getName() + " finished his turn.");
 		playerIndex = (playerIndex + 1) % players.size();
 		actionPanel.setActionCount(2);
+		populateMinimumUncontrolled();
 		readyNextPlayer();
 	}
 	
@@ -246,6 +290,17 @@ public class Game implements Runnable{
 		}
 	}
 	
+	void drawCard() {
+		Card card = deck.remove(0);
+		if(card instanceof GroupCard) {
+			addLog(players.get(playerIndex).getName() + " drew \"" + card.getName() + "\" to uncontrolled groups.");
+			uncontrolled.add((GroupCard)card);
+		}else {
+			addLog(players.get(playerIndex).getName() + " drew special card");
+			players.get(playerIndex).getPowerStructure().addSpecialCard((SpecialCard)card);
+		}
+	}
+	
 	void populateMinimumUncontrolled() {
 		while(uncontrolled.size() < 4) {
 			Card card = deck.remove(0);
@@ -259,8 +314,12 @@ public class Game implements Runnable{
 	}
 	
 	void readyNextPlayer() {
+		populateAvailableActions();
 		actionPanel.updatePlayer(players.get(playerIndex));
 		globalActionPanel.viewList.setSelectedIndex(playerIndex);
+		drawCard();
+		addLog(players.get(playerIndex).getName() + " adding income...");
+		players.get(playerIndex).addIncome();
 	}
 	
 	void shufflePlayers() {

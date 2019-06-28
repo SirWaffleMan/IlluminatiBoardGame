@@ -78,6 +78,14 @@ public abstract class GroupCard extends Card{
 		this.balance += income;
 	}
 	
+	public void addBalance(int amount) {
+		this.balance += amount;
+	}
+	
+	public int getBalance() {
+		return this.balance;
+	}
+	
 	public ArrayList<Alignments> getAlignments(){
 		return alignments;
 	}
@@ -117,6 +125,10 @@ public abstract class GroupCard extends Card{
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public void removeBalance(int moneySpent) {
+		balance -= moneySpent;
 	}
 
 }
