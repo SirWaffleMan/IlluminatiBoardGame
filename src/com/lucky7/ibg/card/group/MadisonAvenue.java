@@ -4,6 +4,9 @@ public class MadisonAvenue extends GroupCard{
 
 	public MadisonAvenue() {
 		super("Madison Avenue", 3, 1, 3, 2);
+		
+		hasTopArrow = true;
+		hasRightArrow = true;
 	}
-	}
+}
 	

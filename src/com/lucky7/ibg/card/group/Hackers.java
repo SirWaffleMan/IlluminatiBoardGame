@@ -8,6 +8,8 @@ public class Hackers extends GroupCard{
 		super("Hackers", 2, 2, 4, 2);
 		addAlignment(Alignments.Weird);
 		addAlignment(Alignments.Criminal);
+		
+		hasBottomArrow = true;
 	}
 	
 }

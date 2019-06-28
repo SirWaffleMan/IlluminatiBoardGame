@@ -8,5 +8,6 @@ public class UndergroundMedia extends GroupCard{
 		addAlignment(Alignments.Liberal); 
 		addAlignment(Alignments.Media); 
 
+		hasBottomArrow = true;
 	}
 }

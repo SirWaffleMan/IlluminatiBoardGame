@@ -9,6 +9,8 @@ public class ComicBookMovies extends GroupCard{
 		addAlignment(Alignments.Weird);
 		addAlignment(Alignments.Violent);
 		addAlignment(Alignments.Media);
+		
+		hasTopArrow = true;
 	}
 
 }

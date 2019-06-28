@@ -9,6 +9,8 @@ public class JunkMail extends GroupCard{
 		addAlignment(Alignments.Criminal);
 		addAlignment(Alignments.Peaceful);
 		addAlignment(Alignments.Media);
+		
+		hasBottomArrow = true;
 	}
 	
 }

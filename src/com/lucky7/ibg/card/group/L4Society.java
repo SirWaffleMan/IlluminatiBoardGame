@@ -8,6 +8,8 @@ public class L4Society extends GroupCard{
 		super("L4 Society", 1, -1, 2, 0);
 		addAlignment(Alignments.Weird);
 		addAlignment(Alignments.Peaceful);
+		
+		hasRightArrow = true;
 	}
 	
 }

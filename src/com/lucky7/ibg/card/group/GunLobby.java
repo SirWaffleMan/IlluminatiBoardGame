@@ -8,6 +8,9 @@ public class GunLobby extends GroupCard{
 		super("Gun Lobby", 2, -1, 3, 1);
 		addAlignment(Alignments.Conservative);
 		addAlignment(Alignments.Violent);
+		
+		hasTopArrow = true;
+		hasRightArrow = true;
 	}
 	
 }

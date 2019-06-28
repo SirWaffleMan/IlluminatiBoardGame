@@ -7,6 +7,9 @@ public class RussianCampaignDonors extends GroupCard{
 	public RussianCampaignDonors() {
 		super("RussianCampaignDonors", 1, 1, 2, 3);
 		addAlignment(Alignments.Criminal);
+		
+		hasTopArrow = true;
+		hasBottomArrow = true;
 	}
-	}
+}
 	

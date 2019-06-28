@@ -8,6 +8,8 @@ public class ConvenienceStores extends GroupCard{
 		super("Convenience Stores", 1, 0, 4, 3);
 		addAlignment(Alignments.Straight);
 		addAlignment(Alignments.Peaceful);
+		
+		hasBottomArrow = true;
 	}
 
 }

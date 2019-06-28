@@ -10,5 +10,9 @@ public class BigMedia extends GroupCard{
 		addAlignment(Alignments.Straight);
 		addAlignment(Alignments.Liberal);
 		addAlignment(Alignments.Media);
+		
+		hasTopArrow = true;
+		hasRightArrow = true;
+		hasBottomArrow = true;
 	}
 }

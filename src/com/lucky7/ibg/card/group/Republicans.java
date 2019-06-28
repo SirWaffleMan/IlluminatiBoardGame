@@ -7,6 +7,10 @@ public class Republicans extends GroupCard{
 	public Republicans() {
 		super("Republicans", 5, -1, 4, 4);
 		addAlignment(Alignments.Conservative);
+		
+		hasTopArrow = true;
+		hasRightArrow = true;
+		hasBottomArrow = true;
 	}
-	}
+}
 	
