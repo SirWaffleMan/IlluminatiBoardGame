@@ -16,11 +16,9 @@ public class AttackToControlInput implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == attackWindow.uncontrolledList) {
-			
+			attackWindow.updateRollLabel();
 		}else if(e.getSource() == attackWindow.enactAttackButton) {
 			attackWindow.enactAttack();
-		}else if(e.getSource() == attackWindow.powerSlider) {
-			
 		}
 	}
 }

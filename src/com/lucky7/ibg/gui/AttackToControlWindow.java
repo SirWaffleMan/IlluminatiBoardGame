@@ -38,6 +38,7 @@ public class AttackToControlWindow extends JFrame{
 	public JComboBox<String> placementList;
 	public JSlider powerSlider;
 	int target = 0;
+	int moneySpent = 0;
 	
 	GroupCard card;
 	GroupCard attackedCard;
@@ -59,6 +60,7 @@ public class AttackToControlWindow extends JFrame{
 		panel.setBackground(new Color(60,60,60));
 		panel.setLayout(new GridBagLayout());
 		uncontrolledList = new JComboBox<GroupCard>();
+		uncontrolledList.addActionListener(input);
 		placementList = new JComboBox<String>();
 		
 		// TODO: Add other player's cards
@@ -78,7 +80,7 @@ public class AttackToControlWindow extends JFrame{
 		if(max != 0) {
 			powerSlider = new JSlider(JSlider.HORIZONTAL,
 	                min, max, init);
-			powerSlider.setMajorTickSpacing(2);
+			powerSlider.setMajorTickSpacing(max-1);
 			powerSlider.setMinorTickSpacing(1);
 			powerSlider.setPaintTicks(true);
 			powerSlider.setPaintLabels(true);
@@ -134,19 +136,23 @@ public class AttackToControlWindow extends JFrame{
 		updateRollLabel();
 	}
 	
-	void updateRollLabel() {
-		target = card.getPower() - attackedCard.getResistance();
-		int moneySpent = (powerSlider != null) ? powerSlider.getValue() : 0;
-		
-		rollLabel.setText("Roll: " + (target + moneySpent) + " or less");
+	public void updateRollLabel() {
+		attackedCard = (GroupCard) uncontrolledList.getSelectedItem();
+		// TODO: Fix this bodge
+		try {
+			target = card.getPower() - attackedCard.getResistance();
+			moneySpent = (powerSlider != null) ? powerSlider.getValue() : 0;
+			
+			rollLabel.setText("Roll: " + (target + moneySpent) + " or less");
+		}catch(NullPointerException e) {
+			
+		}
 	}
 
 
 	public void enactAttack() {
 		
 		Player player = game.getCurrentPlayer();
-		PowerStructure ps = player.getPowerStructure();
-		
 		String placement = (String) placementList.getSelectedItem();
 		
 		SourceDirection direction = SourceDirection.NONE;
@@ -168,7 +174,7 @@ public class AttackToControlWindow extends JFrame{
 		
 		int roll = game.rollDice();
 		
-		if(roll <= target && roll < 11) {
+		if(roll <= target + moneySpent && roll < 11) {
 			game.addLog("Attack was successful!");
 			player.addCardToPowerStructure(card, attackedCard, direction);
 			game.uncontrolled.remove(attackedCard);
