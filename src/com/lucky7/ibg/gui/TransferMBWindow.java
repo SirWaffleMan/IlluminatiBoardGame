@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 
 import com.lucky7.ibg.Game;
+import com.lucky7.ibg.card.group.GroupCard;
 import com.lucky7.ibg.input.TransferInput;
 
 public class TransferMBWindow extends JFrame{
@@ -25,7 +26,8 @@ public class TransferMBWindow extends JFrame{
 	JLabel amountLabel;
 	public JButton enactTransferButton;
 	TransferInput input;
-	public JComboBox<String> groupList;
+	public JComboBox<GroupCard> groupList;
+	JSlider mbSlider;
 	
 	public TransferMBWindow(Game g) {
 		this.game = g;
@@ -42,18 +44,26 @@ public class TransferMBWindow extends JFrame{
 		panel.setBackground(new Color(60,60,60));
 		panel.setLayout(new GridBagLayout());
 		
-		groupList = new JComboBox<String>();
-		groupList.addItem("1");
-		groupList.addItem("2");
-		groupList.addItem("3");
-		groupList.addItem("4");
+		groupList = new JComboBox<GroupCard>();
+		// Add top card
+		if(game.getSelectedCard().getTopCard() != null) {
+			groupList.addItem(game.getSelectedCard().getTopCard());
+		}
+		if(game.getSelectedCard().getRightCard() != null) {
+			groupList.addItem(game.getSelectedCard().getRightCard());
+		}
+		if(game.getSelectedCard().getBottomCard() != null) {
+			groupList.addItem(game.getSelectedCard().getBottomCard());
+		}
+		if(game.getSelectedCard().getLeftCard() != null) {
+			groupList.addItem(game.getSelectedCard().getLeftCard());
+		}
 		groupList.setPreferredSize(new Dimension(200,20));
 		
 		int min = 0;
 		int max = 15;
 		int init = 0;
-		JSlider mbSlider = new JSlider(JSlider.HORIZONTAL,
-                min, max, init);
+		mbSlider = new JSlider(JSlider.HORIZONTAL, min, max, init);
 		mbSlider.setMajorTickSpacing(5);
 		mbSlider.setMinorTickSpacing(1);
 		mbSlider.setPaintTicks(true);
@@ -88,7 +98,11 @@ public class TransferMBWindow extends JFrame{
 	}
 	
 	public void enactTransfer() {
-		//TODO: Check if it's a card that player owns
+		game.addLog("Money transfer was successful");
+		int balance = mbSlider.getValue();
+		game.getSelectedCard().removeBalance(balance);
+		GroupCard card = (GroupCard) groupList.getSelectedItem();
+		card.addBalance(balance);
 		
 		dispose();
 	}

@@ -78,6 +78,10 @@ public abstract class GroupCard extends Card{
 		this.balance += income;
 	}
 	
+	public void addBalance(int amount) {
+		this.balance += amount;
+	}
+	
 	public int getBalance() {
 		return this.balance;
 	}
