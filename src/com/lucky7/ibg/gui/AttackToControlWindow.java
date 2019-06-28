@@ -94,11 +94,8 @@ public class AttackToControlWindow extends JFrame{
 		    });
 		}
 		
-
-		
 		uncontrolledList.setPreferredSize(new Dimension(200,20));
 		placementList.setPreferredSize(new Dimension(200,20));
-		
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.NORTH;
