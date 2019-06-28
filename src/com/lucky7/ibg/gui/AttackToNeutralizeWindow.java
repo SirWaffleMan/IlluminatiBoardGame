@@ -50,8 +50,8 @@ public class AttackToNeutralizeWindow extends JFrame{
 		uncontrolledList = new JComboBox<GroupCard>();
 		
 		// TODO: Add other player's cards
-		for(int i = 0; i < game.uncontrolled.size(); i++) {
-			uncontrolledList.addItem(game.uncontrolled.get(i));
+		for(int i = 0; i < game.getControlledGroups().size() - game.players.size(); i++) {
+			uncontrolledList.addItem(game.getControlledGroups(i));
 		}
 				
 		int min = 0;

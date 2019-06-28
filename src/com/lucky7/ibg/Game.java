@@ -45,7 +45,7 @@ public class Game implements Runnable{
 	JTextArea gameLogger;
 	GameInput input;
 	
-	ArrayList<Player> players;
+	public ArrayList<Player> players;
 	int playerIndex = 0;
 	ArrayList<IlluminatiCard> illuminatiCards;
 	ArrayList<Card> deck;
@@ -99,6 +99,28 @@ public class Game implements Runnable{
 			actionPanel.transferPowerButton.setVisible(true);
 			actionPanel.transferMoneyButton.setVisible(true);
 		}
+	}
+	
+	public ArrayList<GroupCard> getControlledGroups() {
+		ArrayList<GroupCard> controlled = new ArrayList<GroupCard>();
+		
+		for(int i = 0; i < players.size(); i++) {
+			controlled.addAll(players.get(i).getControlledGroups());
+		}
+		return controlled;
+	}
+	
+	public GroupCard getControlledGroups(int index) {
+		ArrayList<GroupCard> controlled = getControlledGroups();
+		
+		for(int i = 0; i < controlled.size(); i++) {
+			Card card = controlled.get(i);
+			if(card instanceof IlluminatiCard) {
+				controlled.remove(i);
+			}
+		}
+		
+		return controlled.get(index);
 	}
 	
 	public void attackToNeutralize() {
