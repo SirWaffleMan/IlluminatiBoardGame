@@ -145,6 +145,7 @@ public class AttackToControlWindow extends JFrame{
 		if(roll <= target && roll < 11) {
 			game.addLog("Attack was successful!");
 			player.addCardToPowerStructure(card, attackedCard, direction);
+			game.uncontrolled.remove(attackedCard);
 		}else {
 			game.addLog("Attack was not successful!");
 		}
